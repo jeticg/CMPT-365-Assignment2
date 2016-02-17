@@ -1,0 +1,518 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E192A3A51C752C8D00E25FAC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E192A3A41C752C8D00E25FAC /* AppDelegate.m */; };
+		E192A3A81C752C8D00E25FAC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E192A3A71C752C8D00E25FAC /* main.m */; };
+		E192A3AB1C752C8D00E25FAC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E192A3AA1C752C8D00E25FAC /* ViewController.m */; };
+		E192A3AE1C752C8D00E25FAC /* Document.m in Sources */ = {isa = PBXBuildFile; fileRef = E192A3AD1C752C8D00E25FAC /* Document.m */; };
+		E192A3B01C752C8D00E25FAC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E192A3AF1C752C8D00E25FAC /* Assets.xcassets */; };
+		E192A3B31C752C8D00E25FAC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E192A3B11C752C8D00E25FAC /* Main.storyboard */; };
+		E192A3BE1C752C8D00E25FAC /* CMPT_365_PA2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = E192A3BD1C752C8D00E25FAC /* CMPT_365_PA2Tests.m */; };
+		E192A3C91C752C8D00E25FAC /* CMPT_365_PA2UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = E192A3C81C752C8D00E25FAC /* CMPT_365_PA2UITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E192A3BA1C752C8D00E25FAC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E192A3981C752C8D00E25FAC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E192A39F1C752C8D00E25FAC;
+			remoteInfo = "CMPT-365-PA2";
+		};
+		E192A3C51C752C8D00E25FAC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E192A3981C752C8D00E25FAC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E192A39F1C752C8D00E25FAC;
+			remoteInfo = "CMPT-365-PA2";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		E192A3A01C752C8D00E25FAC /* CMPT-365-PA2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CMPT-365-PA2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E192A3A31C752C8D00E25FAC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		E192A3A41C752C8D00E25FAC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		E192A3A71C752C8D00E25FAC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E192A3A91C752C8D00E25FAC /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		E192A3AA1C752C8D00E25FAC /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		E192A3AC1C752C8D00E25FAC /* Document.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Document.h; sourceTree = "<group>"; };
+		E192A3AD1C752C8D00E25FAC /* Document.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Document.m; sourceTree = "<group>"; };
+		E192A3AF1C752C8D00E25FAC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E192A3B21C752C8D00E25FAC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E192A3B41C752C8D00E25FAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E192A3B91C752C8D00E25FAC /* CMPT-365-PA2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CMPT-365-PA2Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E192A3BD1C752C8D00E25FAC /* CMPT_365_PA2Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CMPT_365_PA2Tests.m; sourceTree = "<group>"; };
+		E192A3BF1C752C8D00E25FAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E192A3C41C752C8D00E25FAC /* CMPT-365-PA2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CMPT-365-PA2UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E192A3C81C752C8D00E25FAC /* CMPT_365_PA2UITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CMPT_365_PA2UITests.m; sourceTree = "<group>"; };
+		E192A3CA1C752C8D00E25FAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E192A39D1C752C8D00E25FAC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E192A3B61C752C8D00E25FAC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E192A3C11C752C8D00E25FAC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E192A3971C752C8D00E25FAC = {
+			isa = PBXGroup;
+			children = (
+				E192A3A21C752C8D00E25FAC /* CMPT-365-PA2 */,
+				E192A3BC1C752C8D00E25FAC /* CMPT-365-PA2Tests */,
+				E192A3C71C752C8D00E25FAC /* CMPT-365-PA2UITests */,
+				E192A3A11C752C8D00E25FAC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E192A3A11C752C8D00E25FAC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E192A3A01C752C8D00E25FAC /* CMPT-365-PA2.app */,
+				E192A3B91C752C8D00E25FAC /* CMPT-365-PA2Tests.xctest */,
+				E192A3C41C752C8D00E25FAC /* CMPT-365-PA2UITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E192A3A21C752C8D00E25FAC /* CMPT-365-PA2 */ = {
+			isa = PBXGroup;
+			children = (
+				E192A3A31C752C8D00E25FAC /* AppDelegate.h */,
+				E192A3A41C752C8D00E25FAC /* AppDelegate.m */,
+				E192A3A91C752C8D00E25FAC /* ViewController.h */,
+				E192A3AA1C752C8D00E25FAC /* ViewController.m */,
+				E192A3AC1C752C8D00E25FAC /* Document.h */,
+				E192A3AD1C752C8D00E25FAC /* Document.m */,
+				E192A3AF1C752C8D00E25FAC /* Assets.xcassets */,
+				E192A3B11C752C8D00E25FAC /* Main.storyboard */,
+				E192A3B41C752C8D00E25FAC /* Info.plist */,
+				E192A3A61C752C8D00E25FAC /* Supporting Files */,
+			);
+			path = "CMPT-365-PA2";
+			sourceTree = "<group>";
+		};
+		E192A3A61C752C8D00E25FAC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E192A3A71C752C8D00E25FAC /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E192A3BC1C752C8D00E25FAC /* CMPT-365-PA2Tests */ = {
+			isa = PBXGroup;
+			children = (
+				E192A3BD1C752C8D00E25FAC /* CMPT_365_PA2Tests.m */,
+				E192A3BF1C752C8D00E25FAC /* Info.plist */,
+			);
+			path = "CMPT-365-PA2Tests";
+			sourceTree = "<group>";
+		};
+		E192A3C71C752C8D00E25FAC /* CMPT-365-PA2UITests */ = {
+			isa = PBXGroup;
+			children = (
+				E192A3C81C752C8D00E25FAC /* CMPT_365_PA2UITests.m */,
+				E192A3CA1C752C8D00E25FAC /* Info.plist */,
+			);
+			path = "CMPT-365-PA2UITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E192A39F1C752C8D00E25FAC /* CMPT-365-PA2 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E192A3CD1C752C8D00E25FAC /* Build configuration list for PBXNativeTarget "CMPT-365-PA2" */;
+			buildPhases = (
+				E192A39C1C752C8D00E25FAC /* Sources */,
+				E192A39D1C752C8D00E25FAC /* Frameworks */,
+				E192A39E1C752C8D00E25FAC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "CMPT-365-PA2";
+			productName = "CMPT-365-PA2";
+			productReference = E192A3A01C752C8D00E25FAC /* CMPT-365-PA2.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E192A3B81C752C8D00E25FAC /* CMPT-365-PA2Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E192A3D01C752C8D00E25FAC /* Build configuration list for PBXNativeTarget "CMPT-365-PA2Tests" */;
+			buildPhases = (
+				E192A3B51C752C8D00E25FAC /* Sources */,
+				E192A3B61C752C8D00E25FAC /* Frameworks */,
+				E192A3B71C752C8D00E25FAC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E192A3BB1C752C8D00E25FAC /* PBXTargetDependency */,
+			);
+			name = "CMPT-365-PA2Tests";
+			productName = "CMPT-365-PA2Tests";
+			productReference = E192A3B91C752C8D00E25FAC /* CMPT-365-PA2Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		E192A3C31C752C8D00E25FAC /* CMPT-365-PA2UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E192A3D31C752C8D00E25FAC /* Build configuration list for PBXNativeTarget "CMPT-365-PA2UITests" */;
+			buildPhases = (
+				E192A3C01C752C8D00E25FAC /* Sources */,
+				E192A3C11C752C8D00E25FAC /* Frameworks */,
+				E192A3C21C752C8D00E25FAC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E192A3C61C752C8D00E25FAC /* PBXTargetDependency */,
+			);
+			name = "CMPT-365-PA2UITests";
+			productName = "CMPT-365-PA2UITests";
+			productReference = E192A3C41C752C8D00E25FAC /* CMPT-365-PA2UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E192A3981C752C8D00E25FAC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "Jetic Gu";
+				TargetAttributes = {
+					E192A39F1C752C8D00E25FAC = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+					E192A3B81C752C8D00E25FAC = {
+						CreatedOnToolsVersion = 7.2.1;
+						TestTargetID = E192A39F1C752C8D00E25FAC;
+					};
+					E192A3C31C752C8D00E25FAC = {
+						CreatedOnToolsVersion = 7.2.1;
+						TestTargetID = E192A39F1C752C8D00E25FAC;
+					};
+				};
+			};
+			buildConfigurationList = E192A39B1C752C8D00E25FAC /* Build configuration list for PBXProject "CMPT-365-PA2" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E192A3971C752C8D00E25FAC;
+			productRefGroup = E192A3A11C752C8D00E25FAC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E192A39F1C752C8D00E25FAC /* CMPT-365-PA2 */,
+				E192A3B81C752C8D00E25FAC /* CMPT-365-PA2Tests */,
+				E192A3C31C752C8D00E25FAC /* CMPT-365-PA2UITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E192A39E1C752C8D00E25FAC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E192A3B01C752C8D00E25FAC /* Assets.xcassets in Resources */,
+				E192A3B31C752C8D00E25FAC /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E192A3B71C752C8D00E25FAC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E192A3C21C752C8D00E25FAC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E192A39C1C752C8D00E25FAC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E192A3AE1C752C8D00E25FAC /* Document.m in Sources */,
+				E192A3AB1C752C8D00E25FAC /* ViewController.m in Sources */,
+				E192A3A81C752C8D00E25FAC /* main.m in Sources */,
+				E192A3A51C752C8D00E25FAC /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E192A3B51C752C8D00E25FAC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E192A3BE1C752C8D00E25FAC /* CMPT_365_PA2Tests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E192A3C01C752C8D00E25FAC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E192A3C91C752C8D00E25FAC /* CMPT_365_PA2UITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E192A3BB1C752C8D00E25FAC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E192A39F1C752C8D00E25FAC /* CMPT-365-PA2 */;
+			targetProxy = E192A3BA1C752C8D00E25FAC /* PBXContainerItemProxy */;
+		};
+		E192A3C61C752C8D00E25FAC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E192A39F1C752C8D00E25FAC /* CMPT-365-PA2 */;
+			targetProxy = E192A3C51C752C8D00E25FAC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		E192A3B11C752C8D00E25FAC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E192A3B21C752C8D00E25FAC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E192A3CB1C752C8D00E25FAC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		E192A3CC1C752C8D00E25FAC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		E192A3CE1C752C8D00E25FAC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "CMPT-365-PA2/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "jetic-studio.CMPT-365-PA2";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		E192A3CF1C752C8D00E25FAC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "CMPT-365-PA2/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "jetic-studio.CMPT-365-PA2";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		E192A3D11C752C8D00E25FAC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "CMPT-365-PA2Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "jetic-studio.CMPT-365-PA2Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CMPT-365-PA2.app/Contents/MacOS/CMPT-365-PA2";
+			};
+			name = Debug;
+		};
+		E192A3D21C752C8D00E25FAC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "CMPT-365-PA2Tests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "jetic-studio.CMPT-365-PA2Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CMPT-365-PA2.app/Contents/MacOS/CMPT-365-PA2";
+			};
+			name = Release;
+		};
+		E192A3D41C752C8D00E25FAC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "CMPT-365-PA2UITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "jetic-studio.CMPT-365-PA2UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "CMPT-365-PA2";
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		E192A3D51C752C8D00E25FAC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "CMPT-365-PA2UITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "jetic-studio.CMPT-365-PA2UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "CMPT-365-PA2";
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E192A39B1C752C8D00E25FAC /* Build configuration list for PBXProject "CMPT-365-PA2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E192A3CB1C752C8D00E25FAC /* Debug */,
+				E192A3CC1C752C8D00E25FAC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E192A3CD1C752C8D00E25FAC /* Build configuration list for PBXNativeTarget "CMPT-365-PA2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E192A3CE1C752C8D00E25FAC /* Debug */,
+				E192A3CF1C752C8D00E25FAC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		E192A3D01C752C8D00E25FAC /* Build configuration list for PBXNativeTarget "CMPT-365-PA2Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E192A3D11C752C8D00E25FAC /* Debug */,
+				E192A3D21C752C8D00E25FAC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		E192A3D31C752C8D00E25FAC /* Build configuration list for PBXNativeTarget "CMPT-365-PA2UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E192A3D41C752C8D00E25FAC /* Debug */,
+				E192A3D51C752C8D00E25FAC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E192A3981C752C8D00E25FAC /* Project object */;
+}
