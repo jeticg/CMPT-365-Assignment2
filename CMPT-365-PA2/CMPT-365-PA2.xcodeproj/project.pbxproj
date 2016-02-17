@@ -15,6 +15,7 @@
 		E192A3B31C752C8D00E25FAC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E192A3B11C752C8D00E25FAC /* Main.storyboard */; };
 		E192A3BE1C752C8D00E25FAC /* CMPT_365_PA2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = E192A3BD1C752C8D00E25FAC /* CMPT_365_PA2Tests.m */; };
 		E192A3C91C752C8D00E25FAC /* CMPT_365_PA2UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = E192A3C81C752C8D00E25FAC /* CMPT_365_PA2UITests.m */; };
+		E1C0D08F1C752E4F001DE3A1 /* jmatrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1C0D08D1C752E4F001DE3A1 /* jmatrix.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,8 @@
 		E192A3C41C752C8D00E25FAC /* CMPT-365-PA2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CMPT-365-PA2UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E192A3C81C752C8D00E25FAC /* CMPT_365_PA2UITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CMPT_365_PA2UITests.m; sourceTree = "<group>"; };
 		E192A3CA1C752C8D00E25FAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E1C0D08D1C752E4F001DE3A1 /* jmatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = jmatrix.cpp; path = include/jmatrix.cpp; sourceTree = "<group>"; };
+		E1C0D08E1C752E4F001DE3A1 /* jmatrix.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = jmatrix.hpp; path = include/jmatrix.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +85,8 @@
 		E192A3971C752C8D00E25FAC = {
 			isa = PBXGroup;
 			children = (
+				E1C0D08D1C752E4F001DE3A1 /* jmatrix.cpp */,
+				E1C0D08E1C752E4F001DE3A1 /* jmatrix.hpp */,
 				E192A3A21C752C8D00E25FAC /* CMPT-365-PA2 */,
 				E192A3BC1C752C8D00E25FAC /* CMPT-365-PA2Tests */,
 				E192A3C71C752C8D00E25FAC /* CMPT-365-PA2UITests */,
@@ -272,6 +277,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E192A3AE1C752C8D00E25FAC /* Document.m in Sources */,
+				E1C0D08F1C752E4F001DE3A1 /* jmatrix.cpp in Sources */,
 				E192A3AB1C752C8D00E25FAC /* ViewController.m in Sources */,
 				E192A3A81C752C8D00E25FAC /* main.m in Sources */,
 				E192A3A51C752C8D00E25FAC /* AppDelegate.m in Sources */,
@@ -495,6 +501,7 @@
 				E192A3CF1C752C8D00E25FAC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E192A3D01C752C8D00E25FAC /* Build configuration list for PBXNativeTarget "CMPT-365-PA2Tests" */ = {
 			isa = XCConfigurationList;
@@ -503,6 +510,7 @@
 				E192A3D21C752C8D00E25FAC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E192A3D31C752C8D00E25FAC /* Build configuration list for PBXNativeTarget "CMPT-365-PA2UITests" */ = {
 			isa = XCConfigurationList;
@@ -511,6 +519,7 @@
 				E192A3D51C752C8D00E25FAC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
