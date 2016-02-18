@@ -54,7 +54,7 @@
 		E192A3C81C752C8D00E25FAC /* CMPT_365_PA2UITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CMPT_365_PA2UITests.m; sourceTree = "<group>"; };
 		E192A3CA1C752C8D00E25FAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E1C0D08D1C752E4F001DE3A1 /* jmatrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = jmatrix.cpp; path = include/jmatrix.cpp; sourceTree = "<group>"; };
-		E1C0D08E1C752E4F001DE3A1 /* jmatrix.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = jmatrix.hpp; path = include/jmatrix.hpp; sourceTree = "<group>"; };
+		E1C0D08E1C752E4F001DE3A1 /* jmatrix.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = jmatrix.hpp; path = include/jmatrix.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
