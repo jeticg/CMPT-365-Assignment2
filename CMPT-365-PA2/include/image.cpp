@@ -23,8 +23,9 @@ Vector          conv_RGB_YUV(Jmatrix s);
 unsigned int    conv_YUV_BIT(Vector s);
 
 // Function Implications(image.cpp)
-Vector conv_BIT_RGB(unsigned char s[]) {
-    double a[3]={double(s[2]),double(s[1]),double(s[0])};
+Vector conv_BIT_RGB(unsigned int s) {
+    double R=s>>16, G=(s>>8)%(1<<8), B=s%(1<<8);
+    double a[3]={R,G,B};
     Vector p(3,a);
     return p;
 }
@@ -95,8 +96,33 @@ Image::Image(FILE * infile) {
     (void) jpeg_finish_decompress(&cinfo);
     jpeg_destroy_decompress(&cinfo);
     
-    bmap_value = (int*)pTest;
+    bmap_value = (unsigned int*)pTest;
     height_value = height;
     width_value = width;
     depth_value = 32;
+}
+Image::Image(int hi, int wi) {
+    height_value=hi; width_value=wi;
+    bmap_value = new unsigned int[hi*wi];
+}
+
+const int Image::h() {
+    return height_value;
+}
+
+const int Image::w() {
+    return width_value;
+}
+
+Image Image::RGBtoYUV() {
+    Image result;
+    unsigned int *pointer=result.bmap_value;
+    //
+    for (int i=0;i<h();i++)
+        for (int j=0;j<w();j++) {
+            *pointer=conv_YUV_BIT(conv_RGB_YUV(conv_BIT_RGB(*pointer)));
+            pointer++;
+        }
+    //
+    return result;
 }

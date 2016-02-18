@@ -17,9 +17,13 @@
 
 class Image {
 private:
-    int *bmap_value;
+    unsigned int *bmap_value;
     int height_value, width_value, depth_value;
 public:
     Image();
     Image(FILE *infile);
+    Image(int hi, int wi);
+    const int h();
+    const int w();
+    Image RGBtoYUV();
 };
