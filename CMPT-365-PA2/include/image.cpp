@@ -1,16 +1,9 @@
 //
-//  Document.h
+//  image.cpp
 //  CMPT-365-PA2
 //
 //  Created by Jetic Gu on 17.02.16.
 //  Copyright © 2016 Jetic Gu. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
-#import "image.hpp"
-
-@interface Document : NSDocument
-
-
-@end
-
+#include "image.hpp"
