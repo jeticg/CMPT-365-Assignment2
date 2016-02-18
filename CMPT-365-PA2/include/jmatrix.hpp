@@ -17,6 +17,10 @@
 
 #endif /* jmatrix_hpp */
 
+//
+class Jmatrix;
+class Vector;
+//
 class Jmatrix {
 private:
     unsigned int x_value, y_value;      //size of the matrix
@@ -35,10 +39,12 @@ public:
     Jmatrix operator-(Jmatrix& m);
     Jmatrix operator*(Jmatrix& m);
     Jmatrix T();
+    operator Vector();
 };
 
 class Vector: public Jmatrix {
 public:
+    Vector();
     Vector(int x, double init_a[]);
     double val(int x);
     void   set(int x, double value);

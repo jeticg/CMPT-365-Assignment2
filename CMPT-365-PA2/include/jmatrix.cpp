@@ -126,6 +126,20 @@ Jmatrix Jmatrix::T() {
     return result;
 }
 
+Jmatrix::operator Vector() {
+    Vector result;
+    //
+    for (int i=0;i<x_value;i++)
+        result.set(i,a[i][1]);
+    result.x_value=x();
+    result.y_value=y();
+    //
+    return result;
+}
+
+Vector::Vector() {
+    Jmatrix();
+}
 Vector::Vector(int x, double init_a[]) {
     Jmatrix(x,1,init_a);
 }
