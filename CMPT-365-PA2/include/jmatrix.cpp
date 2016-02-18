@@ -12,12 +12,14 @@
 void Jmatrix::shrink() {
     bool flag=true;
     while (flag) {
+        if (x_value==0) break;
         for (int i=0;i<y();i++)
             if (a[x()-1][i]!=0) {flag=false;break;}
         if (flag) x_value--;
     }
     flag=true;
     while (flag) {
+        if (y_value==0) break;
         for (int i=0;i<x();i++)
             if (a[i][y()-1]!=0) {flag=false;break;}
         if (flag) y_value--;
@@ -30,13 +32,13 @@ Jmatrix::Jmatrix() {
     memset(a, 0, sizeof(a));
 }
 
-Jmatrix::Jmatrix(int init_x, int init_y, const double *init_a[]) {
+Jmatrix::Jmatrix(int init_x, int init_y, double init_a[]) {
     x_value=init_x;
     y_value=init_y;
     //int size=x*y;
     for (int i=0;i<x_value;i++)
         for (int j=0;j<y_value;j++)
-            a[i][j]=*init_a[i*y_value+j];
+            a[i][j]=init_a[i*y()+j];
     shrink();
 }
 
@@ -53,8 +55,8 @@ double  Jmatrix::val(int x, int y) {
 
 void    Jmatrix::set(int x, int y, double value) {
     a[x][y]=value;
-    x_value=max(x_value,x);
-    y_value=max(y_value,y);
+    x_value=max(x_value,x+1);
+    y_value=max(y_value,y+1);
     shrink();
 }
 
@@ -99,8 +101,8 @@ Jmatrix Jmatrix:: operator-(Jmatrix& m) {
 Jmatrix Jmatrix:: operator*(Jmatrix& m) {
     Jmatrix result;
     //
-    if (y()!=m.x()) return result;
-    
+    if (y()!=m.x()) y_value=m.x_value=max(y(), m.x());
+
     result.x_value = x();
     result.y_value = m.y();
     for (int i=0;i<result.x();i++)

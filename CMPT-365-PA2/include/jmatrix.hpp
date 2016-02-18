@@ -24,7 +24,7 @@ private:
     void shrink();                      //remove rows and columns containing zero only;
 public:
     Jmatrix();
-    Jmatrix(int init_x, int init_y, const double * init_a[]);   //size of the matrix and intities
+    Jmatrix(int init_x, int init_y, double init_a[]);   //size of the matrix and intities
                                                                 //of the matrix
     const int x();
     const int y();
