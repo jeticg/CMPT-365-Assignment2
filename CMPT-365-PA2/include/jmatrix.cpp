@@ -113,3 +113,27 @@ Jmatrix Jmatrix:: operator*(Jmatrix& m) {
     result.shrink();
     return result;
 }
+
+Jmatrix Jmatrix::T() {
+    Jmatrix result;
+    //
+    result.x_value=y_value;
+    result.y_value=x_value;
+    for (int i=0;i<x_value;i++)
+        for (int j=0;j<y_value;j++)
+            result.a[j][i]=a[i][j];
+    //
+    return result;
+}
+
+Vector::Vector(int x, double init_a[]) {
+    Jmatrix(x,1,init_a);
+}
+
+double Vector::val(int x) {
+    return Jmatrix::val(x, 1);
+}
+void   Vector::set(int x, double value) {
+    Jmatrix::set(x, 1, value);
+}
+

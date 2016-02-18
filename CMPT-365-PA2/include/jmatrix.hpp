@@ -34,4 +34,12 @@ public:
     Jmatrix operator+(Jmatrix& m);
     Jmatrix operator-(Jmatrix& m);
     Jmatrix operator*(Jmatrix& m);
+    Jmatrix T();
+};
+
+class Vector: public Jmatrix {
+public:
+    Vector(int x, double init_a[]);
+    double val(int x);
+    void   set(int x, double value);
 };
