@@ -7,10 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "image.hpp"
 
 @interface Document : NSDocument
-
 
 @end
 

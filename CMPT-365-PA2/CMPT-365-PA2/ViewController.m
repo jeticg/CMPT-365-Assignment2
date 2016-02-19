@@ -9,17 +9,24 @@
 #import "ViewController.h"
 
 @implementation ViewController
+@synthesize imgOriginal;
+@synthesize imgConvYUV;
+@synthesize imgConv2;
+@synthesize imgConv3;
+@synthesize imgConv4;
+@synthesize imgConvRGB;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    NSImage *defImage;
+    defImage = [NSImage imageNamed:@"default.jpg"];
+    [imgOriginal    setImage:defImage];
+    [imgConvYUV     setImage:defImage];
+    [imgConv2       setImage:defImage];
+    [imgConv3       setImage:defImage];
+    [imgConv4       setImage:defImage];
+    [imgConvRGB     setImage:defImage];
     // Do any additional setup after loading the view.
-}
-
-- (void)setRepresentedObject:(id)representedObject {
-    [super setRepresentedObject:representedObject];
-
-    // Update the view, if already loaded.
 }
 
 @end

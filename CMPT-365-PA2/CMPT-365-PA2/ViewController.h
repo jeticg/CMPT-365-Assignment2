@@ -8,8 +8,19 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface ViewController : NSViewController
-
+@interface ViewController : NSViewController {
+    NSImageView* imgOriginal;
+    NSImageView* imgConvYUV;
+    NSImageView* imgConv2;
+    NSImageView* imgConv3;
+    NSImageView* imgConv4;
+    NSImageView* imgConvRGB;
+}
+@property(retain) IBOutlet NSImageView* imgOriginal;
+@property(retain) IBOutlet NSImageView* imgConvYUV;
+@property(retain) IBOutlet NSImageView* imgConv2;
+@property(retain) IBOutlet NSImageView* imgConv3;
+@property(retain) IBOutlet NSImageView* imgConv4;
+@property(retain) IBOutlet NSImageView* imgConvRGB;
 
 @end
-
