@@ -32,7 +32,7 @@ Jmatrix::Jmatrix() {
     memset(a, 0, sizeof(a));
 }
 
-Jmatrix::Jmatrix(int init_x, int init_y, double init_a[]) {
+Jmatrix::Jmatrix(int init_x, int init_y, const double init_a[]) {
     x_value=init_x;
     y_value=init_y;
     //int size=x*y;
@@ -49,7 +49,7 @@ const int Jmatrix:: y() {
     return y_value;
 }
 
-double  Jmatrix::val(int x, int y) {
+const double  Jmatrix::val(int x, int y) {
     return a[x][y];
 }
 
@@ -60,51 +60,51 @@ void    Jmatrix::set(int x, int y, double value) {
     shrink();
 }
 
-Jmatrix Jmatrix:: operator=(Jmatrix& m) {
+const Jmatrix Jmatrix:: operator=(const Jmatrix& m) {
     Jmatrix result;
     //
     for (int i=0;i<MAX_MATRIX;i++)
         for (int j=0;j<MAX_MATRIX;j++)
             result.a[i][j]=m.a[i][j];
-    result.x_value=m.x();
-    result.y_value=m.y();
+    result.x_value=m.x_value;
+    result.y_value=m.y_value;
     //
     return result;
 }
 
-Jmatrix Jmatrix:: operator+(Jmatrix& m) {
+Jmatrix Jmatrix:: operator+(const Jmatrix& m) {
     Jmatrix result;
     //
     for (int i=0;i<MAX_MATRIX;i++)
         for (int j=0;j<MAX_MATRIX;j++)
             result.a[i][j]=a[i][j]+m.a[i][j];
-    result.x_value=max(x(),m.x());
-    result.y_value=max(y(),m.y());
+    result.x_value=max(x(),m.x_value);
+    result.y_value=max(y(),m.y_value);
     result.shrink();
     //
     return result;
 }
 
-Jmatrix Jmatrix:: operator-(Jmatrix& m) {
+Jmatrix Jmatrix:: operator-(const Jmatrix& m) {
     Jmatrix result;
     //
     for (int i=0;i<MAX_MATRIX;i++)
         for (int j=0;j<MAX_MATRIX;j++)
             result.a[i][j]=a[i][j]-m.a[i][j];
-    result.x_value=max(x(),m.x());
-    result.y_value=max(y(),m.y());
+    result.x_value=max(x(),m.x_value);
+    result.y_value=max(y(),m.y_value);
     //
     result.shrink();
     return result;
 }
 
-Jmatrix Jmatrix:: operator*(Jmatrix& m) {
+Jmatrix Jmatrix:: operator*(const Jmatrix& m) {
     Jmatrix result;
     //
-    if (y()!=m.x()) y_value=m.x_value=max(y(), m.x());
+    if (y()!=m.x_value) y_value=max(y(), m.x_value);
 
     result.x_value = x();
-    result.y_value = m.y();
+    result.y_value = m.y_value;
     for (int i=0;i<result.x();i++)
         for (int j=0;j<result.y();j++)
             for (int k=0;k<y();k++)
@@ -141,13 +141,13 @@ Vector::Vector() {
     Jmatrix();
 }
 Vector::Vector(int x, double init_a[]) {
-    Jmatrix(x,1,init_a);
+    Jmatrix(x,0,init_a);
 }
 
-double Vector::val(int x) {
-    return Jmatrix::val(x, 1);
+const double Vector::val(int x) {
+    return Jmatrix::val(x, 0);
 }
 void   Vector::set(int x, double value) {
-    Jmatrix::set(x, 1, value);
+    Jmatrix::set(x, 0, value);
 }
 

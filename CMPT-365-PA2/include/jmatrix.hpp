@@ -28,16 +28,16 @@ private:
     void shrink();                      //remove rows and columns containing zero only;
 public:
     Jmatrix();
-    Jmatrix(int init_x, int init_y, double init_a[]);   //size of the matrix and intities
-                                                                //of the matrix
+    Jmatrix(int init_x, int init_y, const double init_a[]); //size of the matrix and intities
+                                                            //of the matrix
     const int x();
     const int y();
-    double val(int x, int y);
+    const double val(int x, int y);
     void   set(int x, int y, double value);
-    Jmatrix operator=(Jmatrix& m);
-    Jmatrix operator+(Jmatrix& m);
-    Jmatrix operator-(Jmatrix& m);
-    Jmatrix operator*(Jmatrix& m);
+    const Jmatrix operator=(const Jmatrix& m);
+    Jmatrix operator+(const Jmatrix& m);
+    Jmatrix operator-(const Jmatrix& m);
+    Jmatrix operator*(const Jmatrix& m);
     Jmatrix T();
     operator Vector();
 };
@@ -46,6 +46,6 @@ class Vector: public Jmatrix {
 public:
     Vector();
     Vector(int x, double init_a[]);
-    double val(int x);
+    const double val(int x);
     void   set(int x, double value);
 };
