@@ -27,3 +27,7 @@ public:
     const int w();
     Image RGBtoYUV();
 };
+
+Vector conv_BIT_RGB(unsigned int s);
+Vector conv_RGB_YUV(Vector s);
+unsigned int conv_YUV_BIT(Vector s)
