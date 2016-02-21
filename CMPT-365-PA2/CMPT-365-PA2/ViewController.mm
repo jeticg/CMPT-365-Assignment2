@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "jmatrix.hpp"
 #include <cmath>
+#define ALPHA_VALUE 1
 
 @implementation ViewController
 
@@ -29,6 +30,16 @@
 @synthesize imgConv12;
 @synthesize imgConvRGB;
 
+int conv_quantisation[8][8] = {
+    {2, 2, 2, 2, 2, 2, 2, 2},
+    {2, 2, 2, 2, 2, 2, 2, 2},
+    {2, 2, 2, 2, 2, 2, 2, 2},
+    {2, 2, 2, 2, 2, 2, 2, 2},
+    {2, 2, 2, 2, 2, 2, 2, 2},
+    {2, 2, 2, 2, 2, 2, 2, 2},
+    {2, 2, 2, 2, 2, 2, 2, 2},
+    {2, 2, 2, 2, 2, 2, 2, 2}
+};
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -97,21 +108,22 @@
         for (int j=0;j<[imageRepY pixelsHigh];j++) {
             NSColor *tmp=[imageRepY colorAtX:i y:j];
             
-            Vector c;
-            c.set(0, [tmp redComponent]);
-            c.set(1, [tmp greenComponent]);
-            c.set(2, [tmp blueComponent]);
+            double R=[tmp redComponent];
+            double G=[tmp greenComponent];
+            double B=[tmp blueComponent];
             
-            c=conv_yuv*c;
+            double Y=a_conv_yuv[0]*R+a_conv_yuv[1]*G+a_conv_yuv[2]*B;
+            double U=a_conv_yuv[3]*R+a_conv_yuv[4]*G+a_conv_yuv[5]*B;
+            double V=a_conv_yuv[6]*R+a_conv_yuv[7]*G+a_conv_yuv[8]*B;
 
-            imgOriY.set(i, j, c.val(0));
+            imgOriY.set(i, j, Y);
             #ifdef M444
-                imgOriU.set(i, j, c.val(1));
-                imgOriV.set(i, j, c.val(2));
+                imgOriU.set(i, j, U);
+                imgOriV.set(i, j, V);
             #else
                 if (i%2) {
-                    imgOriU.set(i, j, (j%2)?c.val(1):imgOriU.val(i, j-1));
-                    imgOriV.set(i, j, (i%2)?c.val(2):imgOriV.val(i, j-1));
+                    imgOriU.set(i, j, (j%2)?U:imgOriU.val(i, j-1));
+                    imgOriV.set(i, j, (i%2)?V:imgOriV.val(i, j-1));
                 } else {
                     imgOriU.set(i, j, imgOriU.val(i-1, j));
                     imgOriV.set(i, j, imgOriV.val(i-1, j));
@@ -119,11 +131,11 @@
             #endif
 
             
-            tmp=[NSColor colorWithDeviceRed:imgOriY.val(i,j)   green:imgOriY.val(i,j) blue:imgOriY.val(i,j)  alpha:0];
+            tmp=[NSColor colorWithDeviceRed:imgOriY.val(i,j)   green:imgOriY.val(i,j) blue:imgOriY.val(i,j)  alpha:ALPHA_VALUE];
             [imageRepY setColor:tmp atX:i y:j];
-            tmp=[NSColor colorWithDeviceRed:imgOriU.val(i,j)   green:imgOriU.val(i,j) blue:imgOriU.val(i,j)  alpha:0];
+            tmp=[NSColor colorWithDeviceRed:imgOriU.val(i,j)   green:imgOriU.val(i,j) blue:imgOriU.val(i,j)  alpha:ALPHA_VALUE];
             [imageRepU setColor:tmp atX:i y:j];
-            tmp=[NSColor colorWithDeviceRed:imgOriV.val(i,j)   green:imgOriV.val(i,j) blue:imgOriV.val(i,j)  alpha:0];
+            tmp=[NSColor colorWithDeviceRed:imgOriV.val(i,j)   green:imgOriV.val(i,j) blue:imgOriV.val(i,j)  alpha:ALPHA_VALUE];
             [imageRepV setColor:tmp atX:i y:j];
             
         }
@@ -150,11 +162,11 @@
         for (int j=0;j<[imageRepY pixelsHigh];j++) {
             NSColor *tmp;
             
-            tmp=[NSColor colorWithDeviceRed:imgDCTY.val(i,j)   green:imgDCTY.val(i,j) blue:imgDCTY.val(i,j)  alpha:0];
+            tmp=[NSColor colorWithDeviceRed:imgDCTY.val(i,j)   green:imgDCTY.val(i,j) blue:imgDCTY.val(i,j)  alpha:ALPHA_VALUE];
             [imageRepY setColor:tmp atX:i y:j];
-            tmp=[NSColor colorWithDeviceRed:imgDCTU.val(i,j)   green:imgDCTU.val(i,j) blue:imgDCTU.val(i,j)  alpha:0];
+            tmp=[NSColor colorWithDeviceRed:imgDCTU.val(i,j)   green:imgDCTU.val(i,j) blue:imgDCTU.val(i,j)  alpha:ALPHA_VALUE];
             [imageRepU setColor:tmp atX:i y:j];
-            tmp=[NSColor colorWithDeviceRed:imgDCTV.val(i,j)   green:imgDCTV.val(i,j) blue:imgDCTV.val(i,j)  alpha:0];
+            tmp=[NSColor colorWithDeviceRed:imgDCTV.val(i,j)   green:imgDCTV.val(i,j) blue:imgDCTV.val(i,j)  alpha:ALPHA_VALUE];
             [imageRepV setColor:tmp atX:i y:j];
             
         }
@@ -181,11 +193,11 @@
         for (int j=0;j<[imageRepY pixelsHigh];j++) {
             NSColor *tmp;
             
-            tmp=[NSColor colorWithDeviceRed:imgIDCTY.val(i,j)   green:imgIDCTY.val(i,j) blue:imgIDCTY.val(i,j)  alpha:0];
+            tmp=[NSColor colorWithDeviceRed:imgIDCTY.val(i,j)   green:imgIDCTY.val(i,j) blue:imgIDCTY.val(i,j)  alpha:ALPHA_VALUE];
             [imageRepY setColor:tmp atX:i y:j];
-            tmp=[NSColor colorWithDeviceRed:imgIDCTU.val(i,j)   green:imgIDCTU.val(i,j) blue:imgIDCTU.val(i,j)  alpha:0];
+            tmp=[NSColor colorWithDeviceRed:imgIDCTU.val(i,j)   green:imgIDCTU.val(i,j) blue:imgIDCTU.val(i,j)  alpha:ALPHA_VALUE];
             [imageRepU setColor:tmp atX:i y:j];
-            tmp=[NSColor colorWithDeviceRed:imgIDCTV.val(i,j)   green:imgIDCTV.val(i,j) blue:imgIDCTV.val(i,j)  alpha:0];
+            tmp=[NSColor colorWithDeviceRed:imgIDCTV.val(i,j)   green:imgIDCTV.val(i,j) blue:imgIDCTV.val(i,j)  alpha:ALPHA_VALUE];
             [imageRepV setColor:tmp atX:i y:j];
             
         }
@@ -211,15 +223,16 @@
         for (int j=0;j<[imageRep pixelsHigh];j++) {
             NSColor *tmp=[imageRep colorAtX:i y:j];
             
-            Vector c;
-            c.set(0, imgIDCTY.val(i, j));
-            c.set(1, imgIDCTU.val(i, j));
-            c.set(2, imgIDCTV.val(i, j));
+            double Y = imgIDCTY.val(i, j);
+            double U = imgIDCTU.val(i, j);
+            double V = imgIDCTV.val(i, j);
             
-            c=conv_rgb*c;
+            double R=a_conv_rgb[0]*Y+a_conv_rgb[1]*U+a_conv_rgb[2]*V;
+            double G=a_conv_rgb[3]*Y+a_conv_rgb[4]*U+a_conv_rgb[5]*V;
+            double B=a_conv_rgb[6]*Y+a_conv_rgb[7]*U+a_conv_rgb[8]*V;
 
             
-            tmp=[NSColor colorWithDeviceRed:c.val(0)   green:c.val(1) blue:c.val(2)  alpha:0];
+            tmp=[NSColor colorWithDeviceRed:R   green:G blue:B  alpha:ALPHA_VALUE];
             [imageRep setColor:tmp atX:i y:j];
             
         }
@@ -229,17 +242,6 @@
 }
 
 - (IBAction)generateQUAN:(id)sender {
-    int conv_quantisation[8][8] = {
-        {2, 2, 2, 2, 2, 2, 2, 2},
-        {2, 2, 2, 2, 2, 2, 2, 2},
-        {2, 2, 2, 2, 2, 2, 2, 2},
-        {2, 2, 2, 2, 2, 2, 2, 2},
-        {2, 2, 2, 2, 2, 2, 2, 2},
-        {2, 2, 2, 2, 2, 2, 2, 2},
-        {2, 2, 2, 2, 2, 2, 2, 2},
-        {2, 2, 2, 2, 2, 2, 2, 2}
-    };
-    
     NSBitmapImageRep* imageRepY = [[NSBitmapImageRep alloc] initWithData:[defImage TIFFRepresentation]];
     NSBitmapImageRep* imageRepU = [[NSBitmapImageRep alloc] initWithData:[defImage TIFFRepresentation]];
     NSBitmapImageRep* imageRepV = [[NSBitmapImageRep alloc] initWithData:[defImage TIFFRepresentation]];
@@ -247,11 +249,11 @@
     for (int i=0;i<[imageRepY pixelsWide];i++)
         for (int j=0;j<[imageRepY pixelsHigh];j++) {
             NSColor *tmp;
-            int A,B,C;
+            double A,B,C;
             
-            A=imgDCTY.val(i, j)*255;
-            B=imgDCTU.val(i, j)*255;
-            C=imgDCTV.val(i, j)*255;
+            A=imgDCTY.val(i, j);
+            B=imgDCTU.val(i, j);
+            C=imgDCTV.val(i, j);
             
             A/=conv_quantisation[i%8][j%8];
             B/=conv_quantisation[i%8][j%8];
@@ -261,15 +263,15 @@
             B*=conv_quantisation[i%8][j%8];
             C*=conv_quantisation[i%8][j%8];
             
-            imgQUANY.set(i, j, (double)A/255.0);
-            imgQUANU.set(i, j, (double)B/255.0);
-            imgQUANV.set(i, j, (double)C/255.0);
+            imgQUANY.set(i, j, (double)A);
+            imgQUANU.set(i, j, (double)B);
+            imgQUANV.set(i, j, (double)C);
             
-            tmp=[NSColor colorWithDeviceRed:imgQUANY.val(i,j)   green:imgQUANY.val(i,j) blue:imgQUANY.val(i,j)  alpha:0];
+            tmp=[NSColor colorWithDeviceRed:imgQUANY.val(i,j)   green:imgQUANY.val(i,j) blue:imgQUANY.val(i,j)  alpha:ALPHA_VALUE];
             [imageRepY setColor:tmp atX:i y:j];
-            tmp=[NSColor colorWithDeviceRed:imgQUANU.val(i,j)   green:imgQUANU.val(i,j) blue:imgQUANU.val(i,j)  alpha:0];
+            tmp=[NSColor colorWithDeviceRed:imgQUANU.val(i,j)   green:imgQUANU.val(i,j) blue:imgQUANU.val(i,j)  alpha:ALPHA_VALUE];
             [imageRepU setColor:tmp atX:i y:j];
-            tmp=[NSColor colorWithDeviceRed:imgQUANV.val(i,j)   green:imgQUANV.val(i,j) blue:imgQUANV.val(i,j)  alpha:0];
+            tmp=[NSColor colorWithDeviceRed:imgQUANV.val(i,j)   green:imgQUANV.val(i,j) blue:imgQUANV.val(i,j)  alpha:ALPHA_VALUE];
             [imageRepV setColor:tmp atX:i y:j];
             
         }

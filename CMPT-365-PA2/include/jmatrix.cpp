@@ -168,7 +168,8 @@ void    Jmatrix::sub_8x8_rep(int x, int y, const Jmatrix& m) {
 }
 
 Jmatrix Jmatrix::dct2() {
-    int n=max(x_value,y_value);
+    int n=8;
+    Jmatrix result=*this;
     //
     Jmatrix conv_a;
     for (int i=0;i<n;i++)
@@ -181,11 +182,17 @@ Jmatrix Jmatrix::dct2() {
             double value=c*cos((j+0.5)*i*PI/n);
             conv_a.set(i,j,value);
         }
-    return conv_a*(*this)*conv_a.T();
+    for (int i=0;i<x_value;i+=8) {
+        for (int j=0; j<y_value; j+=8) {
+            result.sub_8x8_rep(i, j, conv_a*result.sub_8x8_val(i, j)*conv_a.T());
+        }
+    }
+    return result;
 }
 
 Jmatrix Jmatrix::idct2() {
-    int n=max(x_value,y_value);
+    int n=8;
+    Jmatrix result=*this;
     //
     Jmatrix conv_a;
     for (int i=0;i<n;i++)
@@ -195,7 +202,13 @@ Jmatrix Jmatrix::idct2() {
                 c=1/sqrt(n);
             else
                 c=2/sqrt(n);
-            conv_a.set(i,j,c*cos((j+0.5)*i*PI/n));
+            double value=c*cos((j+0.5)*i*PI/n);
+            conv_a.set(i,j,value);
         }
-    return conv_a.T()*(*this)*conv_a;
+    for (int i=0;i<x_value;i+=8) {
+        for (int j=0; j<y_value; j+=8) {
+            result.sub_8x8_rep(i, j, conv_a.T()*result.sub_8x8_val(i, j)*conv_a);
+        }
+    }
+    return result;
 }
