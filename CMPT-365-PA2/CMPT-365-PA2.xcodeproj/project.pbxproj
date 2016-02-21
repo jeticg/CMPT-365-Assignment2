@@ -40,6 +40,7 @@
 /* Begin PBXFileReference section */
 		E138322C1C76798800291B76 /* default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = default.jpg; sourceTree = "<group>"; };
 		E16B9E0F1C7684A300B39D4A /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		E18341931C79D09C000A57A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E192A3A01C752C8D00E25FAC /* CMPT-365-PA2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CMPT-365-PA2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E192A3A31C752C8D00E25FAC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E192A3A41C752C8D00E25FAC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -49,7 +50,6 @@
 		E192A3AC1C752C8D00E25FAC /* Document.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Document.h; sourceTree = "<group>"; };
 		E192A3AD1C752C8D00E25FAC /* Document.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Document.m; sourceTree = "<group>"; };
 		E192A3AF1C752C8D00E25FAC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		E192A3B21C752C8D00E25FAC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E192A3B41C752C8D00E25FAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E192A3B91C752C8D00E25FAC /* CMPT-365-PA2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CMPT-365-PA2Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E192A3BD1C752C8D00E25FAC /* CMPT_365_PA2Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CMPT_365_PA2Tests.m; sourceTree = "<group>"; };
@@ -335,7 +335,7 @@
 		E192A3B11C752C8D00E25FAC /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				E192A3B21C752C8D00E25FAC /* Base */,
+				E18341931C79D09C000A57A0 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

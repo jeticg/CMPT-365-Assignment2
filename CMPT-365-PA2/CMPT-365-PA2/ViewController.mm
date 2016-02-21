@@ -48,16 +48,7 @@
 @synthesize t46; @synthesize t56; @synthesize t66; @synthesize t76;
 @synthesize t47; @synthesize t57; @synthesize t67; @synthesize t77;
 
-int conv_quantisation[8][8] = {
-    {2, 2, 2, 2, 2, 2, 2, 2},
-    {2, 2, 2, 2, 2, 2, 2, 2},
-    {2, 2, 2, 2, 2, 2, 2, 2},
-    {2, 2, 2, 2, 2, 2, 2, 2},
-    {2, 2, 2, 2, 2, 2, 2, 2},
-    {2, 2, 2, 2, 2, 2, 2, 2},
-    {2, 2, 2, 2, 2, 2, 2, 2},
-    {2, 2, 2, 2, 2, 2, 2, 2}
-};
+IBOutlet NSTextField* quanti[8][8];
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -79,6 +70,21 @@ int conv_quantisation[8][8] = {
     [imgConv12      setImage:defImage];
     [imgConvRGB     setImage:defImage];
     // Do any additional setup after loading the view.
+    IBOutlet NSTextField* quanti[8][8]= {
+        {t00,t01,t02,t03,t04,t05,t06,t07},
+        {t10,t11,t12,t13,t14,t15,t16,t17},
+        {t20,t21,t22,t23,t24,t25,t26,t27},
+        {t30,t31,t32,t33,t34,t35,t36,t37},
+        
+        {t40,t41,t42,t43,t44,t45,t46,t47},
+        {t50,t51,t52,t53,t54,t55,t56,t57},
+        {t60,t61,t62,t63,t64,t65,t66,t67},
+        {t70,t71,t72,t73,t74,t75,t76,t77}
+    };
+    for (int i=0;i<8;i++)
+        for (int j=0;j<8;j++)
+            [quanti[i][j] setIntValue:2];
+    /*
     [t00 setIntValue:2]; [t10 setIntValue:2]; [t20 setIntValue:2]; [t30 setIntValue:2];
     [t01 setIntValue:2]; [t11 setIntValue:2]; [t21 setIntValue:2]; [t31 setIntValue:2];
     [t02 setIntValue:2]; [t12 setIntValue:2]; [t22 setIntValue:2]; [t32 setIntValue:2];
@@ -96,7 +102,7 @@ int conv_quantisation[8][8] = {
     [t44 setIntValue:2]; [t54 setIntValue:2]; [t64 setIntValue:2]; [t74 setIntValue:2];
     [t45 setIntValue:2]; [t55 setIntValue:2]; [t65 setIntValue:2]; [t75 setIntValue:2];
     [t46 setIntValue:2]; [t56 setIntValue:2]; [t66 setIntValue:2]; [t76 setIntValue:2];
-    [t47 setIntValue:2]; [t57 setIntValue:2]; [t67 setIntValue:2]; [t77 setIntValue:2];
+    [t47 setIntValue:2]; [t57 setIntValue:2]; [t67 setIntValue:2]; [t77 setIntValue:2];*/
 }
 
 - (IBAction)generateYUV:(id)sender{
@@ -278,41 +284,17 @@ int conv_quantisation[8][8] = {
 }
 
 - (IBAction)generateQUAN:(id)sender {
-    conv_quantisation[0][0]=[t00 intValue]; conv_quantisation[4][0]=[t40 intValue];
-    conv_quantisation[0][1]=[t01 intValue]; conv_quantisation[4][1]=[t41 intValue];
-    conv_quantisation[0][2]=[t02 intValue]; conv_quantisation[4][2]=[t42 intValue];
-    conv_quantisation[0][3]=[t03 intValue]; conv_quantisation[4][3]=[t43 intValue];
-    conv_quantisation[0][4]=[t04 intValue]; conv_quantisation[4][4]=[t44 intValue];
-    conv_quantisation[0][5]=[t05 intValue]; conv_quantisation[4][5]=[t45 intValue];
-    conv_quantisation[0][6]=[t06 intValue]; conv_quantisation[4][6]=[t46 intValue];
-    conv_quantisation[0][7]=[t07 intValue]; conv_quantisation[4][7]=[t47 intValue];
-    
-    conv_quantisation[1][0]=[t10 intValue]; conv_quantisation[5][0]=[t50 intValue];
-    conv_quantisation[1][1]=[t11 intValue]; conv_quantisation[5][1]=[t51 intValue];
-    conv_quantisation[1][2]=[t12 intValue]; conv_quantisation[5][2]=[t52 intValue];
-    conv_quantisation[1][3]=[t13 intValue]; conv_quantisation[5][3]=[t53 intValue];
-    conv_quantisation[1][4]=[t14 intValue]; conv_quantisation[5][4]=[t54 intValue];
-    conv_quantisation[1][5]=[t15 intValue]; conv_quantisation[5][5]=[t55 intValue];
-    conv_quantisation[1][6]=[t16 intValue]; conv_quantisation[5][6]=[t56 intValue];
-    conv_quantisation[1][7]=[t17 intValue]; conv_quantisation[5][7]=[t57 intValue];
-    
-    conv_quantisation[2][0]=[t20 intValue]; conv_quantisation[6][0]=[t60 intValue];
-    conv_quantisation[2][1]=[t21 intValue]; conv_quantisation[6][1]=[t61 intValue];
-    conv_quantisation[2][2]=[t22 intValue]; conv_quantisation[6][2]=[t62 intValue];
-    conv_quantisation[2][3]=[t23 intValue]; conv_quantisation[6][3]=[t63 intValue];
-    conv_quantisation[2][4]=[t24 intValue]; conv_quantisation[6][4]=[t64 intValue];
-    conv_quantisation[2][5]=[t25 intValue]; conv_quantisation[6][5]=[t65 intValue];
-    conv_quantisation[2][6]=[t26 intValue]; conv_quantisation[6][6]=[t66 intValue];
-    conv_quantisation[2][7]=[t27 intValue]; conv_quantisation[6][7]=[t67 intValue];
-    
-    conv_quantisation[3][0]=[t30 intValue]; conv_quantisation[7][0]=[t70 intValue];
-    conv_quantisation[3][1]=[t31 intValue]; conv_quantisation[7][1]=[t71 intValue];
-    conv_quantisation[3][2]=[t32 intValue]; conv_quantisation[7][2]=[t72 intValue];
-    conv_quantisation[3][3]=[t33 intValue]; conv_quantisation[7][3]=[t73 intValue];
-    conv_quantisation[3][4]=[t34 intValue]; conv_quantisation[7][4]=[t74 intValue];
-    conv_quantisation[3][5]=[t35 intValue]; conv_quantisation[7][5]=[t75 intValue];
-    conv_quantisation[3][6]=[t36 intValue]; conv_quantisation[7][6]=[t76 intValue];
-    conv_quantisation[3][7]=[t37 intValue]; conv_quantisation[7][7]=[t77 intValue];
+    IBOutlet NSTextField* quanti[8][8]= {
+        {t00,t01,t02,t03,t04,t05,t06,t07},
+        {t10,t11,t12,t13,t14,t15,t16,t17},
+        {t20,t21,t22,t23,t24,t25,t26,t27},
+        {t30,t31,t32,t33,t34,t35,t36,t37},
+        
+        {t40,t41,t42,t43,t44,t45,t46,t47},
+        {t50,t51,t52,t53,t54,t55,t56,t57},
+        {t60,t61,t62,t63,t64,t65,t66,t67},
+        {t70,t71,t72,t73,t74,t75,t76,t77}
+    };
     NSBitmapImageRep* imageRepY = [[NSBitmapImageRep alloc] initWithData:[defImage TIFFRepresentation]];
     NSBitmapImageRep* imageRepU = [[NSBitmapImageRep alloc] initWithData:[defImage TIFFRepresentation]];
     NSBitmapImageRep* imageRepV = [[NSBitmapImageRep alloc] initWithData:[defImage TIFFRepresentation]];
@@ -320,23 +302,23 @@ int conv_quantisation[8][8] = {
     for (int i=0;i<[imageRepY pixelsWide];i++)
         for (int j=0;j<[imageRepY pixelsHigh];j++) {
             NSColor *tmp;
-            double A,B,C;
+            int A,B,C;
             
-            A=imgDCTY.val(i, j);
-            B=imgDCTU.val(i, j);
-            C=imgDCTV.val(i, j);
+            A=imgDCTY.val(i, j)*255;
+            B=imgDCTU.val(i, j)*255;
+            C=imgDCTV.val(i, j)*255;
             
-            A/=conv_quantisation[i%8][j%8];
-            B/=conv_quantisation[i%8][j%8];
-            C/=conv_quantisation[i%8][j%8];
+            A/=[quanti[i%8][j%8] intValue];
+            B/=[quanti[i%8][j%8] intValue];
+            C/=[quanti[i%8][j%8] intValue];
             
-            A*=conv_quantisation[i%8][j%8];
-            B*=conv_quantisation[i%8][j%8];
-            C*=conv_quantisation[i%8][j%8];
+            A*=[quanti[i%8][j%8] intValue];
+            B*=[quanti[i%8][j%8] intValue];
+            C*=[quanti[i%8][j%8] intValue];
             
-            imgQUANY.set(i, j, (double)A);
-            imgQUANU.set(i, j, (double)B);
-            imgQUANV.set(i, j, (double)C);
+            imgQUANY.set(i, j, (double)A/255);
+            imgQUANU.set(i, j, (double)B/255);
+            imgQUANV.set(i, j, (double)C/255);
             
             tmp=[NSColor colorWithDeviceRed:imgQUANY.val(i,j)   green:imgQUANY.val(i,j) blue:imgQUANY.val(i,j)  alpha:ALPHA_VALUE];
             [imageRepY setColor:tmp atX:i y:j];
@@ -353,5 +335,138 @@ int conv_quantisation[8][8] = {
     [imgConv9 setImage:imageU];
     NSImage *imageV = [[NSImage alloc] initWithCGImage:[imageRepV CGImage] size:NSMakeSize([imageRepV pixelsWide],[imageRepV pixelsHigh])];
     [imgConv10 setImage:imageV];
+}
+
+- (IBAction)quanti0:(id)sender {
+    IBOutlet NSTextField* quanti[8][8]= {
+        {t00,t01,t02,t03,t04,t05,t06,t07},
+        {t10,t11,t12,t13,t14,t15,t16,t17},
+        {t20,t21,t22,t23,t24,t25,t26,t27},
+        {t30,t31,t32,t33,t34,t35,t36,t37},
+        
+        {t40,t41,t42,t43,t44,t45,t46,t47},
+        {t50,t51,t52,t53,t54,t55,t56,t57},
+        {t60,t61,t62,t63,t64,t65,t66,t67},
+        {t70,t71,t72,t73,t74,t75,t76,t77}
+    };
+    int tmp[8][8]={
+        {16, 11, 10, 16, 24, 40, 51, 61},
+        {12, 12, 14, 19, 26, 58, 60, 55},
+        {14, 13, 16, 24, 40, 57, 69, 56},
+        {14, 17, 22, 29, 51, 87, 80, 62},
+        
+        {18, 22, 37, 56, 68, 109, 103, 77},
+        {24, 35, 55, 64, 81, 104, 113, 92},
+        {49, 64, 78, 87, 103, 121, 120, 101},
+        {72, 92, 95, 98, 112, 100, 103, 99}
+    };
+    
+    for (int i=0;i<8;i++)
+        for (int j=0;j<8;j++)
+            [quanti[i][j] setIntValue:tmp[i][j] ];
+}
+- (IBAction)quanti1:(id)sender {
+    IBOutlet NSTextField* quanti[8][8]= {
+        {t00,t01,t02,t03,t04,t05,t06,t07},
+        {t10,t11,t12,t13,t14,t15,t16,t17},
+        {t20,t21,t22,t23,t24,t25,t26,t27},
+        {t30,t31,t32,t33,t34,t35,t36,t37},
+        
+        {t40,t41,t42,t43,t44,t45,t46,t47},
+        {t50,t51,t52,t53,t54,t55,t56,t57},
+        {t60,t61,t62,t63,t64,t65,t66,t67},
+        {t70,t71,t72,t73,t74,t75,t76,t77}
+    };
+    int tmp[8][8]={
+        {8, 5, 5, 8, 12, 20, 25, 30},
+        {6, 6, 7, 9, 13, 29, 30, 27},
+        {7, 6, 8, 12, 20, 28, 34, 28},
+        {7, 8, 11, 14, 25, 43, 40, 31},
+        
+        {9, 11, 18, 28, 34, 54, 51, 38},
+        {12, 17, 27, 32, 40, 52, 56, 46},
+        {24, 32, 39, 43, 51, 60, 60, 50},
+        {36, 46, 47, 49, 56, 50, 51, 49}
+    };
+    
+    for (int i=0;i<8;i++)
+        for (int j=0;j<8;j++)
+            [quanti[i][j] setIntValue:tmp[i][j] ];
+}
+- (IBAction)quanti2:(id)sender {
+    IBOutlet NSTextField* quanti[8][8]= {
+        {t00,t01,t02,t03,t04,t05,t06,t07},
+        {t10,t11,t12,t13,t14,t15,t16,t17},
+        {t20,t21,t22,t23,t24,t25,t26,t27},
+        {t30,t31,t32,t33,t34,t35,t36,t37},
+        
+        {t40,t41,t42,t43,t44,t45,t46,t47},
+        {t50,t51,t52,t53,t54,t55,t56,t57},
+        {t60,t61,t62,t63,t64,t65,t66,t67},
+        {t70,t71,t72,t73,t74,t75,t76,t77}
+    };
+    int tmp[8][8]={
+        {16<<2, 11<<2, 10<<2, 16<<2, 24<<2, 40<<2, 51<<2, 61<<2},
+        {12<<2, 12<<2, 14<<2, 19<<2, 26<<2, 58<<2, 60<<2, 55<<2},
+        {14<<2, 13<<2, 16<<2, 24<<2, 40<<2, 57<<2, 69<<2, 56<<2},
+        {14<<2, 17<<2, 22<<2, 29<<2, 51<<2, 87<<2, 80<<2, 62<<2},
+        
+        {18<<2, 22<<2, 37<<2, 56<<2, 68<<2, 109<<2, 103<<2, 77<<2},
+        {24<<2, 35<<2, 55<<2, 64<<2, 81<<2, 104<<2, 113<<2, 92<<2},
+        {49<<2, 64<<2, 78<<2, 87<<2, 103<<2, 121<<2, 120<<2, 101<<2},
+        {72<<2, 92<<2, 95<<2, 98<<2, 112<<2, 100<<2, 103<<2, 99<<2}
+    };
+    
+    for (int i=0;i<8;i++)
+        for (int j=0;j<8;j++)
+            [quanti[i][j] setIntValue:tmp[i][j] ];
+}
+- (IBAction)quanti3:(id)sender {
+    IBOutlet NSTextField* quanti[8][8]= {
+        {t00,t01,t02,t03,t04,t05,t06,t07},
+        {t10,t11,t12,t13,t14,t15,t16,t17},
+        {t20,t21,t22,t23,t24,t25,t26,t27},
+        {t30,t31,t32,t33,t34,t35,t36,t37},
+        
+        {t40,t41,t42,t43,t44,t45,t46,t47},
+        {t50,t51,t52,t53,t54,t55,t56,t57},
+        {t60,t61,t62,t63,t64,t65,t66,t67},
+        {t70,t71,t72,t73,t74,t75,t76,t77}
+    };
+    for (int i=0;i<8;i++)
+        for (int j=0;j<8;j++)
+            [quanti[i][j] setIntValue:32 ];
+}
+- (IBAction)quanti4:(id)sender {
+    IBOutlet NSTextField* quanti[8][8]= {
+        {t00,t01,t02,t03,t04,t05,t06,t07},
+        {t10,t11,t12,t13,t14,t15,t16,t17},
+        {t20,t21,t22,t23,t24,t25,t26,t27},
+        {t30,t31,t32,t33,t34,t35,t36,t37},
+        
+        {t40,t41,t42,t43,t44,t45,t46,t47},
+        {t50,t51,t52,t53,t54,t55,t56,t57},
+        {t60,t61,t62,t63,t64,t65,t66,t67},
+        {t70,t71,t72,t73,t74,t75,t76,t77}
+    };
+    for (int i=0;i<8;i++)
+        for (int j=0;j<8;j++)
+            [quanti[i][j] setIntValue:2 ];
+}
+- (IBAction)quanti5:(id)sender {
+    IBOutlet NSTextField* quanti[8][8]= {
+        {t00,t01,t02,t03,t04,t05,t06,t07},
+        {t10,t11,t12,t13,t14,t15,t16,t17},
+        {t20,t21,t22,t23,t24,t25,t26,t27},
+        {t30,t31,t32,t33,t34,t35,t36,t37},
+        
+        {t40,t41,t42,t43,t44,t45,t46,t47},
+        {t50,t51,t52,t53,t54,t55,t56,t57},
+        {t60,t61,t62,t63,t64,t65,t66,t67},
+        {t70,t71,t72,t73,t74,t75,t76,t77}
+    };
+    for (int i=0;i<8;i++)
+        for (int j=0;j<8;j++)
+            [quanti[i][j] setIntValue:128 ];
 }
 @end

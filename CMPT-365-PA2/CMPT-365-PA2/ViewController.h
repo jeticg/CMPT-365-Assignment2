@@ -44,6 +44,8 @@
     NSImageView* imgConv11;
     NSImageView* imgConv12;
     
+    NSImageView* imgConvRGB;
+    
     NSTextField* t00; NSTextField* t10; NSTextField* t20; NSTextField* t30;
     NSTextField* t01; NSTextField* t11; NSTextField* t21; NSTextField* t31;
     NSTextField* t02; NSTextField* t12; NSTextField* t22; NSTextField* t32;
@@ -61,7 +63,6 @@
     NSTextField* t45; NSTextField* t55; NSTextField* t65; NSTextField* t75;
     NSTextField* t46; NSTextField* t56; NSTextField* t66; NSTextField* t76;
     NSTextField* t47; NSTextField* t57; NSTextField* t67; NSTextField* t77;
-    NSImageView* imgConvRGB;
 }
 @property(retain) IBOutlet NSImageView* imgOriginal;
 @property(retain) IBOutlet NSImageView* imgConv1;
@@ -158,4 +159,10 @@
 - (IBAction)generateRGB:(id)sender;
 - (IBAction)generateQUAN:(id)sender;
 
+- (IBAction)quanti0:(id)sender;
+- (IBAction)quanti1:(id)sender;
+- (IBAction)quanti2:(id)sender;
+- (IBAction)quanti3:(id)sender;
+- (IBAction)quanti4:(id)sender;
+- (IBAction)quanti5:(id)sender;
 @end
