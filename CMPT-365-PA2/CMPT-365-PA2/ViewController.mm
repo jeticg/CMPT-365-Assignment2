@@ -49,11 +49,10 @@
     [imgConv11      setImage:defImage];
     [imgConv12      setImage:defImage];
     [imgConvRGB     setImage:defImage];
-    [self generateYUV];
     // Do any additional setup after loading the view.
 }
 
-- (void)generateYUV {
+- (IBAction)generateYUV:(id)sender{
     double a_conv_yuv[]={
         0.299, 0.587, 0.114,
         -0.299, -0.587, 0.886,
@@ -114,7 +113,7 @@
     [imgConv6 setImage:imageV];
 }
 
-- (void)generateDCT {
+- (IBAction)generateDCT:(id)sender; {
     imgDCTY=imgOriY.dct2_8x8();
     imgDCTU=imgOriU.dct2_8x8();
     imgDCTV=imgOriV.dct2_8x8();

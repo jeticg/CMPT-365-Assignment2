@@ -777,6 +777,26 @@
                                 <rect key="frame" x="824" y="511" width="320" height="240"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="photo" id="xwA-Py-Vm4"/>
                             </imageView>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oUt-Kz-s1a">
+                                <rect key="frame" x="10" y="186" width="180" height="32"/>
+                                <buttonCell key="cell" type="push" title="Chroma Subsampling" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tMC-k0-PCR">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="generateYUV:" target="5gI-5U-AMq" id="eG8-dV-ZZo"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Wn-ru-5MV">
+                                <rect key="frame" x="10" y="153" width="180" height="32"/>
+                                <buttonCell key="cell" type="push" title="DCT Generate" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="EOP-SD-Dbl">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="generateDCT:" target="5gI-5U-AMq" id="wlW-Fm-MlA"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <connections>

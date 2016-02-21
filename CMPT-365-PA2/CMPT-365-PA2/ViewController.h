@@ -55,6 +55,9 @@
 @property(retain) IBOutlet NSImageView* imgConv12;
 @property(retain) IBOutlet NSImageView* imgConvRGB;
 
+- (IBAction)generateYUV:(id)sender;
+- (IBAction)generateDCT:(id)sender;
+
 -(void)generateYUV;
 -(void)generateDCT;
 
