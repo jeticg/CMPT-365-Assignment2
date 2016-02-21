@@ -48,11 +48,27 @@
 @synthesize t46; @synthesize t56; @synthesize t66; @synthesize t76;
 @synthesize t47; @synthesize t57; @synthesize t67; @synthesize t77;
 
-IBOutlet NSTextField* quanti[8][8];
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    defImage = [NSImage imageNamed:@"default.jpg"];
+    [self loadNewPic:@"default.jpg"];
+    IBOutlet NSTextField* quanti[8][8]= {
+        {t00,t01,t02,t03,t04,t05,t06,t07},
+        {t10,t11,t12,t13,t14,t15,t16,t17},
+        {t20,t21,t22,t23,t24,t25,t26,t27},
+        {t30,t31,t32,t33,t34,t35,t36,t37},
+        
+        {t40,t41,t42,t43,t44,t45,t46,t47},
+        {t50,t51,t52,t53,t54,t55,t56,t57},
+        {t60,t61,t62,t63,t64,t65,t66,t67},
+        {t70,t71,t72,t73,t74,t75,t76,t77}
+    };
+    for (int i=0;i<8;i++)
+        for (int j=0;j<8;j++)
+            [quanti[i][j] setIntValue:2];
+}
+
+- (void)loadNewPic:(NSString*)address {
+    defImage = [NSImage imageNamed:address];
     [imgOriginal    setImage:defImage];
     [imgConv1       setImage:defImage];
     [imgConv2       setImage:defImage];
@@ -69,42 +85,7 @@ IBOutlet NSTextField* quanti[8][8];
     [imgConv11      setImage:defImage];
     [imgConv12      setImage:defImage];
     [imgConvRGB     setImage:defImage];
-    // Do any additional setup after loading the view.
-    IBOutlet NSTextField* quanti[8][8]= {
-        {t00,t01,t02,t03,t04,t05,t06,t07},
-        {t10,t11,t12,t13,t14,t15,t16,t17},
-        {t20,t21,t22,t23,t24,t25,t26,t27},
-        {t30,t31,t32,t33,t34,t35,t36,t37},
-        
-        {t40,t41,t42,t43,t44,t45,t46,t47},
-        {t50,t51,t52,t53,t54,t55,t56,t57},
-        {t60,t61,t62,t63,t64,t65,t66,t67},
-        {t70,t71,t72,t73,t74,t75,t76,t77}
-    };
-    for (int i=0;i<8;i++)
-        for (int j=0;j<8;j++)
-            [quanti[i][j] setIntValue:2];
-    /*
-    [t00 setIntValue:2]; [t10 setIntValue:2]; [t20 setIntValue:2]; [t30 setIntValue:2];
-    [t01 setIntValue:2]; [t11 setIntValue:2]; [t21 setIntValue:2]; [t31 setIntValue:2];
-    [t02 setIntValue:2]; [t12 setIntValue:2]; [t22 setIntValue:2]; [t32 setIntValue:2];
-    [t03 setIntValue:2]; [t13 setIntValue:2]; [t23 setIntValue:2]; [t33 setIntValue:2];
-    [t04 setIntValue:2]; [t14 setIntValue:2]; [t24 setIntValue:2]; [t34 setIntValue:2];
-    [t05 setIntValue:2]; [t15 setIntValue:2]; [t25 setIntValue:2]; [t35 setIntValue:2];
-    [t06 setIntValue:2]; [t16 setIntValue:2]; [t26 setIntValue:2]; [t36 setIntValue:2];
-    [t07 setIntValue:2]; [t17 setIntValue:2]; [t27 setIntValue:2]; [t37 setIntValue:2];
-    
-    
-    [t40 setIntValue:2]; [t50 setIntValue:2]; [t60 setIntValue:2]; [t70 setIntValue:2];
-    [t41 setIntValue:2]; [t51 setIntValue:2]; [t61 setIntValue:2]; [t71 setIntValue:2];
-    [t42 setIntValue:2]; [t52 setIntValue:2]; [t62 setIntValue:2]; [t72 setIntValue:2];
-    [t43 setIntValue:2]; [t53 setIntValue:2]; [t63 setIntValue:2]; [t73 setIntValue:2];
-    [t44 setIntValue:2]; [t54 setIntValue:2]; [t64 setIntValue:2]; [t74 setIntValue:2];
-    [t45 setIntValue:2]; [t55 setIntValue:2]; [t65 setIntValue:2]; [t75 setIntValue:2];
-    [t46 setIntValue:2]; [t56 setIntValue:2]; [t66 setIntValue:2]; [t76 setIntValue:2];
-    [t47 setIntValue:2]; [t57 setIntValue:2]; [t67 setIntValue:2]; [t77 setIntValue:2];*/
 }
-
 - (IBAction)generateYUV:(id)sender{
     /*
     double a_conv_yuv[]={
@@ -468,5 +449,28 @@ IBOutlet NSTextField* quanti[8][8];
     for (int i=0;i<8;i++)
         for (int j=0;j<8;j++)
             [quanti[i][j] setIntValue:128 ];
+}
+
+- (void)openFile:(id)sender {
+    NSOpenPanel* openPanel = [NSOpenPanel openPanel];
+    
+    openPanel.title = @"Choose a .TXT file";
+    openPanel.showsResizeIndicator = YES;
+    openPanel.showsHiddenFiles = NO;
+    openPanel.canChooseDirectories = NO;
+    openPanel.canCreateDirectories = YES;
+    openPanel.allowsMultipleSelection = NO;
+    openPanel.allowedFileTypes = @[@"jpg"];
+    
+    [openPanel beginWithCompletionHandler:^(NSInteger result){
+        if (result == NSFileHandlingPanelOKButton) {
+            NSURL*  theDoc = [[openPanel URLs] objectAtIndex:0];
+            NSLog(@"%@",[theDoc absoluteURL]);
+            defImage = [[NSImage alloc] initWithContentsOfURL:theDoc];
+            
+            [imgOriginal    setImage:defImage];
+        }
+                          
+    }];
 }
 @end

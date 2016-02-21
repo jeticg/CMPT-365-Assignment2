@@ -165,4 +165,7 @@
 - (IBAction)quanti3:(id)sender;
 - (IBAction)quanti4:(id)sender;
 - (IBAction)quanti5:(id)sender;
+- (IBAction)openFile:(id)sender;
+
+- (void)loadNewPic:(NSString*)address;
 @end

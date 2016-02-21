@@ -48,7 +48,7 @@
 		E192A3A91C752C8D00E25FAC /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		E192A3AA1C752C8D00E25FAC /* ViewController.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		E192A3AC1C752C8D00E25FAC /* Document.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Document.h; sourceTree = "<group>"; };
-		E192A3AD1C752C8D00E25FAC /* Document.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Document.m; sourceTree = "<group>"; };
+		E192A3AD1C752C8D00E25FAC /* Document.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = Document.m; sourceTree = "<group>"; };
 		E192A3AF1C752C8D00E25FAC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E192A3B41C752C8D00E25FAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E192A3B91C752C8D00E25FAC /* CMPT-365-PA2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CMPT-365-PA2Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
