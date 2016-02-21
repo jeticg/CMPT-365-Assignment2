@@ -175,10 +175,10 @@ Jmatrix Jmatrix::dct2() {
         for (int j=0;j<n;j++) {
             double c;
             if (i==0)
-                c=0.3535533906; //sqrt(1/8)
+                c=1/sqrt(n);
             else
-                c=0.5; //sqrt(2/8)
-            double value=c*cos(PI*(j+0.5)*i/8);
+                c=2/sqrt(n);
+            double value=c*cos((j+0.5)*i*PI/n);
             conv_a.set(i,j,value);
         }
     return conv_a*(*this)*conv_a.T();
@@ -192,10 +192,10 @@ Jmatrix Jmatrix::idct2() {
         for (int j=0;j<n;j++) {
             double c;
             if (i==0)
-                c=0.3535533906; //sqrt(1/8)
+                c=1/sqrt(n);
             else
-                c=0.5; //sqrt(2/8)
-            conv_a.set(i,j,c*cos(PI*(j+0.5)*i/8));
+                c=2/sqrt(n);
+            conv_a.set(i,j,c*cos((j+0.5)*i*PI/n));
         }
     return conv_a.T()*(*this)*conv_a;
 }

@@ -9,7 +9,6 @@
 #import "ViewController.h"
 #import "jmatrix.hpp"
 #include <cmath>
-#define p(x) ((x<0)?x:x)
 
 @implementation ViewController
 
@@ -54,6 +53,23 @@
 }
 
 - (IBAction)generateYUV:(id)sender{
+    /*
+    double a_conv_yuv[]={
+        0.299, 0.587, 0.114,
+        -0.299, -0.587, 0.886,
+        0.701, -0.587, -0.114
+    };
+    double a_conv_yuv[]={ //SDTV with BT.601
+        0.299, 0.587, 0.114,
+        -0.14713, -0.28886, 0.436,
+        0.615, -0.51499, -0.10001
+    };
+    double a_conv_yuv[]={ //HDTV with BT709
+        0.2126, 0.7152, 0.0722,
+        -0.09991, -0.33609, 0.436,
+        0.615, -0.55861, -0.05639
+    };
+    */
     double a_conv_yuv[]={
         0.299, 0.587, 0.114,
         -0.299, -0.587, 0.886,
@@ -105,7 +121,7 @@
             
             tmp=[NSColor colorWithDeviceRed:imgOriY.val(i,j)   green:imgOriY.val(i,j) blue:imgOriY.val(i,j)  alpha:0];
             [imageRepY setColor:tmp atX:i y:j];
-            tmp=[NSColor colorWithDeviceRed:p(imgOriU.val(i,j))   green:p(imgOriU.val(i,j)) blue:p(imgOriU.val(i,j))  alpha:0];
+            tmp=[NSColor colorWithDeviceRed:imgOriU.val(i,j)   green:imgOriU.val(i,j) blue:imgOriU.val(i,j)  alpha:0];
             [imageRepU setColor:tmp atX:i y:j];
             tmp=[NSColor colorWithDeviceRed:imgOriV.val(i,j)   green:imgOriV.val(i,j) blue:imgOriV.val(i,j)  alpha:0];
             [imageRepV setColor:tmp atX:i y:j];
@@ -181,5 +197,34 @@
     NSImage *imageV = [[NSImage alloc] initWithCGImage:[imageRepV CGImage] size:NSMakeSize([imageRepV pixelsWide],[imageRepV pixelsHigh])];
     [imgConv12 setImage:imageV];
     
+}
+- (IBAction)generateRGB:(id)sender {
+    double a_conv_rgb[]={
+        1, 0, 1.13983,
+        1, -0.39465, -0.58060,
+        1, 2.03211, 0
+    };
+    Jmatrix conv_rgb(3,3,(double*)a_conv_rgb);
+    NSBitmapImageRep* imageRep = [[NSBitmapImageRep alloc] initWithData:[defImage TIFFRepresentation]];
+    
+    for (int i=0;i<[imageRep pixelsWide];i++)
+        for (int j=0;j<[imageRep pixelsHigh];j++) {
+            NSColor *tmp=[imageRep colorAtX:i y:j];
+            
+            Vector c;
+            c.set(0, imgIDCTY.val(i, j));
+            c.set(1, imgIDCTU.val(i, j));
+            c.set(2, imgIDCTV.val(i, j));
+            
+            c=conv_rgb*c;
+
+            
+            tmp=[NSColor colorWithDeviceRed:c.val(0)   green:c.val(1) blue:c.val(2)  alpha:0];
+            [imageRep setColor:tmp atX:i y:j];
+            
+        }
+    
+    NSImage *imageY = [[NSImage alloc] initWithCGImage:[imageRep CGImage] size:NSMakeSize([imageRep pixelsWide],[imageRep pixelsHigh])];
+    [imgConvRGB setImage:imageY];
 }
 @end

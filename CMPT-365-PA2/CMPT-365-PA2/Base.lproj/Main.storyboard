@@ -807,6 +807,16 @@
                                     <action selector="generateIDCT:" target="5gI-5U-AMq" id="XlD-Jn-wGi"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jZY-et-YMe">
+                                <rect key="frame" x="10" y="87" width="180" height="32"/>
+                                <buttonCell key="cell" type="push" title="YUV-&gt;RGB" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="E5a-9p-H5w">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="generateRGB:" target="5gI-5U-AMq" id="g72-8V-j4W"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <connections>

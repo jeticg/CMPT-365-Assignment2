@@ -62,5 +62,6 @@
 - (IBAction)generateYUV:(id)sender;
 - (IBAction)generateDCT:(id)sender;
 - (IBAction)generateIDCT:(id)sender;
+- (IBAction)generateRGB:(id)sender;
 
 @end

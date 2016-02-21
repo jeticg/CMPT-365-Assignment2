@@ -16,7 +16,7 @@
 #define MAX_MATRIX 200
 #define max(x,y) (x>y)?x:y
 #define dct_c(x) ((x==0)?sqrt(1/x):sqrt(1/x))
-#define PI 3.1415926535
+#define PI 3.1415926536
 #endif /* jmatrix_hpp */
 
 //
