@@ -15,6 +15,10 @@
     Jmatrix imgOriU;
     Jmatrix imgOriV;
     
+    Jmatrix imgDCTY;
+    Jmatrix imgDCTU;
+    Jmatrix imgDCTV;
+    
     NSImageView* imgOriginal;
     NSImageView* imgConv1;
     NSImageView* imgConv2;
@@ -52,5 +56,6 @@
 @property(retain) IBOutlet NSImageView* imgConvRGB;
 
 -(void)generateYUV;
+-(void)generateDCT;
 
 @end

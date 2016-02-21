@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "jmatrix.hpp"
-
+#include <cmath>
 
 @implementation ViewController
 
@@ -114,4 +114,34 @@
     [imgConv6 setImage:imageV];
 }
 
+- (void)generateDCT {
+    imgDCTY=imgOriY.dct2_8x8();
+    imgDCTU=imgOriU.dct2_8x8();
+    imgDCTV=imgOriV.dct2_8x8();
+    
+    NSBitmapImageRep* imageRepY = [[NSBitmapImageRep alloc] initWithData:[defImage TIFFRepresentation]];
+    NSBitmapImageRep* imageRepU = [[NSBitmapImageRep alloc] initWithData:[defImage TIFFRepresentation]];
+    NSBitmapImageRep* imageRepV = [[NSBitmapImageRep alloc] initWithData:[defImage TIFFRepresentation]];
+    
+    for (int i=0;i<[imageRepY pixelsWide];i++)
+        for (int j=0;j<[imageRepY pixelsHigh];j++) {
+            NSColor *tmp;
+            
+            tmp=[NSColor colorWithDeviceRed:imgDCTY.val(i,j)   green:imgDCTY.val(i,j) blue:imgDCTY.val(i,j)  alpha:0];
+            [imageRepY setColor:tmp atX:i y:j];
+            tmp=[NSColor colorWithDeviceRed:imgDCTU.val(i,j)   green:imgDCTU.val(i,j) blue:imgDCTU.val(i,j)  alpha:0];
+            [imageRepU setColor:tmp atX:i y:j];
+            tmp=[NSColor colorWithDeviceRed:imgDCTV.val(i,j)   green:imgDCTV.val(i,j) blue:imgDCTV.val(i,j)  alpha:0];
+            [imageRepV setColor:tmp atX:i y:j];
+            
+        }
+    
+    NSImage *imageY = [[NSImage alloc] initWithCGImage:[imageRepY CGImage] size:NSMakeSize([imageRepY pixelsWide],[imageRepY pixelsHigh])];
+    [imgConv2 setImage:imageY];
+    NSImage *imageU = [[NSImage alloc] initWithCGImage:[imageRepU CGImage] size:NSMakeSize([imageRepU pixelsWide],[imageRepU pixelsHigh])];
+    [imgConv7 setImage:imageU];
+    NSImage *imageV = [[NSImage alloc] initWithCGImage:[imageRepV CGImage] size:NSMakeSize([imageRepV pixelsWide],[imageRepV pixelsHigh])];
+    [imgConv8 setImage:imageV];
+    
+}
 @end

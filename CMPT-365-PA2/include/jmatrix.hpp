@@ -11,10 +11,12 @@
 
 #include <stdio.h>
 #include <cstring>
+#include <cmath>
 
 #define MAX_MATRIX 200
 #define max(x,y) (x>y)?x:y
-
+#define dct_c(x) ((x==0)?sqrt(1/x):sqrt(1/x))
+#define PI 3.1415926535
 #endif /* jmatrix_hpp */
 
 //
@@ -40,6 +42,12 @@ public:
     Jmatrix operator*(const Jmatrix& m);
     Jmatrix T();
     operator Vector();
+    Jmatrix sub_8x8_val(int x, int y);
+    void    sub_8x8_rep(int x, int y, const Jmatrix& m);
+    Jmatrix dct2_8x8();
+    void    dct2_8x8(int si, int sj);
+    Jmatrix idct2_8x8();
+    void    idct2_8x8(int si, int sj);
 };
 
 class Vector: public Jmatrix {

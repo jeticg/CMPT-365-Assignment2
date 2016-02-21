@@ -151,3 +151,72 @@ void   Vector::set(int x, double value) {
     Jmatrix::set(x, 0, value);
 }
 
+Jmatrix Jmatrix::sub_8x8_val(int x, int y) {
+    Jmatrix result; int n=8;
+    //
+    for (int i=0;i<n;i++)
+        for (int j=0;j<n;j++)
+            result.set(i, j, a[x+i][y+j]);
+    //
+    return result;
+}
+void    Jmatrix::sub_8x8_rep(int x, int y, const Jmatrix& m) {
+    int n=8;
+    for (int i=0;i<n;i++)
+        for (int j=0;j<n;j++)
+            set(x+i, y+j, m.a[i][j]);
+}
+
+Jmatrix Jmatrix::dct2_8x8() {
+    Jmatrix result=*this;
+    //
+    for (int i=0;i<x_value;i+=8)
+        for (int j=0; j<y_value; j+=8)
+            result.dct2_8x8(i,j);
+    //
+    return result;
+}
+
+void    Jmatrix::dct2_8x8(int si, int sj) {
+    Jmatrix S=sub_8x8_val(si, sj);
+    Jmatrix conv_a;
+    for (int i=0;i<8;i++)
+        for (int j=0;j<8;j++) {
+            int c;
+            if (i==0)
+                c=0.3535533906; //sqrt(1/8)
+            else
+                c=0.5; //sqrt(2/8)
+            conv_a.set(i,j,c*cos(PI*(j+0.5)*i/8));
+        }
+    //
+    S=conv_a*S*conv_a.T();
+    sub_8x8_rep(si, sj, S);
+}
+
+Jmatrix Jmatrix::idct2_8x8() {
+    Jmatrix result=*this;
+    //
+    for (int i=0;i<x_value;i+=8)
+        for (int j=0; j<y_value; j+=8)
+            result.dct2_8x8(i,j);
+    //
+    return result;
+}
+
+void    Jmatrix::idct2_8x8(int si, int sj) {
+    Jmatrix S=sub_8x8_val(si, sj);
+    Jmatrix conv_a;
+    for (int i=0;i<8;i++)
+        for (int j=0;j<8;j++) {
+            int c;
+            if (i==0)
+                c=0.3535533906; //sqrt(1/8)
+            else
+                c=0.5; //sqrt(2/8)
+            conv_a.set(i,j,c*cos(PI*(j+0.5)*i/8));
+        }
+    //
+    S=conv_a.T()*S*conv_a;
+    sub_8x8_rep(si, sj, S);
+}
