@@ -169,9 +169,9 @@
 }
 
 - (IBAction)generateIDCT:(id)sender; {
-    imgIDCTY=imgDCTY.idct2();
-    imgIDCTU=imgDCTU.idct2();
-    imgIDCTV=imgDCTV.idct2();
+    imgIDCTY=imgQUANY.idct2();
+    imgIDCTU=imgQUANU.idct2();
+    imgIDCTV=imgQUANV.idct2();
     
     NSBitmapImageRep* imageRepY = [[NSBitmapImageRep alloc] initWithData:[defImage TIFFRepresentation]];
     NSBitmapImageRep* imageRepU = [[NSBitmapImageRep alloc] initWithData:[defImage TIFFRepresentation]];
@@ -226,5 +226,59 @@
     
     NSImage *imageY = [[NSImage alloc] initWithCGImage:[imageRep CGImage] size:NSMakeSize([imageRep pixelsWide],[imageRep pixelsHigh])];
     [imgConvRGB setImage:imageY];
+}
+
+- (IBAction)generateQUAN:(id)sender {
+    int conv_quantisation[8][8] = {
+        {2, 2, 2, 2, 2, 2, 2, 2},
+        {2, 2, 2, 2, 2, 2, 2, 2},
+        {2, 2, 2, 2, 2, 2, 2, 2},
+        {2, 2, 2, 2, 2, 2, 2, 2},
+        {2, 2, 2, 2, 2, 2, 2, 2},
+        {2, 2, 2, 2, 2, 2, 2, 2},
+        {2, 2, 2, 2, 2, 2, 2, 2},
+        {2, 2, 2, 2, 2, 2, 2, 2}
+    };
+    
+    NSBitmapImageRep* imageRepY = [[NSBitmapImageRep alloc] initWithData:[defImage TIFFRepresentation]];
+    NSBitmapImageRep* imageRepU = [[NSBitmapImageRep alloc] initWithData:[defImage TIFFRepresentation]];
+    NSBitmapImageRep* imageRepV = [[NSBitmapImageRep alloc] initWithData:[defImage TIFFRepresentation]];
+    
+    for (int i=0;i<[imageRepY pixelsWide];i++)
+        for (int j=0;j<[imageRepY pixelsHigh];j++) {
+            NSColor *tmp;
+            int A,B,C;
+            
+            A=imgDCTY.val(i, j)*255;
+            B=imgDCTU.val(i, j)*255;
+            C=imgDCTV.val(i, j)*255;
+            
+            A/=conv_quantisation[i%8][j%8];
+            B/=conv_quantisation[i%8][j%8];
+            C/=conv_quantisation[i%8][j%8];
+            
+            A*=conv_quantisation[i%8][j%8];
+            B*=conv_quantisation[i%8][j%8];
+            C*=conv_quantisation[i%8][j%8];
+            
+            imgQUANY.set(i, j, (double)A/255.0);
+            imgQUANU.set(i, j, (double)B/255.0);
+            imgQUANV.set(i, j, (double)C/255.0);
+            
+            tmp=[NSColor colorWithDeviceRed:imgQUANY.val(i,j)   green:imgQUANY.val(i,j) blue:imgQUANY.val(i,j)  alpha:0];
+            [imageRepY setColor:tmp atX:i y:j];
+            tmp=[NSColor colorWithDeviceRed:imgQUANU.val(i,j)   green:imgQUANU.val(i,j) blue:imgQUANU.val(i,j)  alpha:0];
+            [imageRepU setColor:tmp atX:i y:j];
+            tmp=[NSColor colorWithDeviceRed:imgQUANV.val(i,j)   green:imgQUANV.val(i,j) blue:imgQUANV.val(i,j)  alpha:0];
+            [imageRepV setColor:tmp atX:i y:j];
+            
+        }
+    
+    NSImage *imageY = [[NSImage alloc] initWithCGImage:[imageRepY CGImage] size:NSMakeSize([imageRepY pixelsWide],[imageRepY pixelsHigh])];
+    [imgConv3 setImage:imageY];
+    NSImage *imageU = [[NSImage alloc] initWithCGImage:[imageRepU CGImage] size:NSMakeSize([imageRepU pixelsWide],[imageRepU pixelsHigh])];
+    [imgConv9 setImage:imageU];
+    NSImage *imageV = [[NSImage alloc] initWithCGImage:[imageRepV CGImage] size:NSMakeSize([imageRepV pixelsWide],[imageRepV pixelsHigh])];
+    [imgConv10 setImage:imageV];
 }
 @end

@@ -19,6 +19,10 @@
     Jmatrix imgDCTU;
     Jmatrix imgDCTV;
     
+    Jmatrix imgQUANY;
+    Jmatrix imgQUANU;
+    Jmatrix imgQUANV;
+    
     Jmatrix imgIDCTY;
     Jmatrix imgIDCTU;
     Jmatrix imgIDCTV;
@@ -63,5 +67,6 @@
 - (IBAction)generateDCT:(id)sender;
 - (IBAction)generateIDCT:(id)sender;
 - (IBAction)generateRGB:(id)sender;
+- (IBAction)generateQUAN:(id)sender;
 
 @end
