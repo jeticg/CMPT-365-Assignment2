@@ -30,6 +30,24 @@
 @synthesize imgConv12;
 @synthesize imgConvRGB;
 
+@synthesize t00; @synthesize t10; @synthesize t20; @synthesize t30;
+@synthesize t01; @synthesize t11; @synthesize t21; @synthesize t31;
+@synthesize t02; @synthesize t12; @synthesize t22; @synthesize t32;
+@synthesize t03; @synthesize t13; @synthesize t23; @synthesize t33;
+@synthesize t04; @synthesize t14; @synthesize t24; @synthesize t34;
+@synthesize t05; @synthesize t15; @synthesize t25; @synthesize t35;
+@synthesize t06; @synthesize t16; @synthesize t26; @synthesize t36;
+@synthesize t07; @synthesize t17; @synthesize t27; @synthesize t37;
+
+@synthesize t40; @synthesize t50; @synthesize t60; @synthesize t70;
+@synthesize t41; @synthesize t51; @synthesize t61; @synthesize t71;
+@synthesize t42; @synthesize t52; @synthesize t62; @synthesize t72;
+@synthesize t43; @synthesize t53; @synthesize t63; @synthesize t73;
+@synthesize t44; @synthesize t54; @synthesize t64; @synthesize t74;
+@synthesize t45; @synthesize t55; @synthesize t65; @synthesize t75;
+@synthesize t46; @synthesize t56; @synthesize t66; @synthesize t76;
+@synthesize t47; @synthesize t57; @synthesize t67; @synthesize t77;
+
 int conv_quantisation[8][8] = {
     {2, 2, 2, 2, 2, 2, 2, 2},
     {2, 2, 2, 2, 2, 2, 2, 2},
@@ -61,6 +79,24 @@ int conv_quantisation[8][8] = {
     [imgConv12      setImage:defImage];
     [imgConvRGB     setImage:defImage];
     // Do any additional setup after loading the view.
+    [t00 setIntValue:2]; [t10 setIntValue:2]; [t20 setIntValue:2]; [t30 setIntValue:2];
+    [t01 setIntValue:2]; [t11 setIntValue:2]; [t21 setIntValue:2]; [t31 setIntValue:2];
+    [t02 setIntValue:2]; [t12 setIntValue:2]; [t22 setIntValue:2]; [t32 setIntValue:2];
+    [t03 setIntValue:2]; [t13 setIntValue:2]; [t23 setIntValue:2]; [t33 setIntValue:2];
+    [t04 setIntValue:2]; [t14 setIntValue:2]; [t24 setIntValue:2]; [t34 setIntValue:2];
+    [t05 setIntValue:2]; [t15 setIntValue:2]; [t25 setIntValue:2]; [t35 setIntValue:2];
+    [t06 setIntValue:2]; [t16 setIntValue:2]; [t26 setIntValue:2]; [t36 setIntValue:2];
+    [t07 setIntValue:2]; [t17 setIntValue:2]; [t27 setIntValue:2]; [t37 setIntValue:2];
+    
+    
+    [t40 setIntValue:2]; [t50 setIntValue:2]; [t60 setIntValue:2]; [t70 setIntValue:2];
+    [t41 setIntValue:2]; [t51 setIntValue:2]; [t61 setIntValue:2]; [t71 setIntValue:2];
+    [t42 setIntValue:2]; [t52 setIntValue:2]; [t62 setIntValue:2]; [t72 setIntValue:2];
+    [t43 setIntValue:2]; [t53 setIntValue:2]; [t63 setIntValue:2]; [t73 setIntValue:2];
+    [t44 setIntValue:2]; [t54 setIntValue:2]; [t64 setIntValue:2]; [t74 setIntValue:2];
+    [t45 setIntValue:2]; [t55 setIntValue:2]; [t65 setIntValue:2]; [t75 setIntValue:2];
+    [t46 setIntValue:2]; [t56 setIntValue:2]; [t66 setIntValue:2]; [t76 setIntValue:2];
+    [t47 setIntValue:2]; [t57 setIntValue:2]; [t67 setIntValue:2]; [t77 setIntValue:2];
 }
 
 - (IBAction)generateYUV:(id)sender{
@@ -242,6 +278,41 @@ int conv_quantisation[8][8] = {
 }
 
 - (IBAction)generateQUAN:(id)sender {
+    conv_quantisation[0][0]=[t00 intValue]; conv_quantisation[4][0]=[t40 intValue];
+    conv_quantisation[0][1]=[t01 intValue]; conv_quantisation[4][1]=[t41 intValue];
+    conv_quantisation[0][2]=[t02 intValue]; conv_quantisation[4][2]=[t42 intValue];
+    conv_quantisation[0][3]=[t03 intValue]; conv_quantisation[4][3]=[t43 intValue];
+    conv_quantisation[0][4]=[t04 intValue]; conv_quantisation[4][4]=[t44 intValue];
+    conv_quantisation[0][5]=[t05 intValue]; conv_quantisation[4][5]=[t45 intValue];
+    conv_quantisation[0][6]=[t06 intValue]; conv_quantisation[4][6]=[t46 intValue];
+    conv_quantisation[0][7]=[t07 intValue]; conv_quantisation[4][7]=[t47 intValue];
+    
+    conv_quantisation[1][0]=[t10 intValue]; conv_quantisation[5][0]=[t50 intValue];
+    conv_quantisation[1][1]=[t11 intValue]; conv_quantisation[5][1]=[t51 intValue];
+    conv_quantisation[1][2]=[t12 intValue]; conv_quantisation[5][2]=[t52 intValue];
+    conv_quantisation[1][3]=[t13 intValue]; conv_quantisation[5][3]=[t53 intValue];
+    conv_quantisation[1][4]=[t14 intValue]; conv_quantisation[5][4]=[t54 intValue];
+    conv_quantisation[1][5]=[t15 intValue]; conv_quantisation[5][5]=[t55 intValue];
+    conv_quantisation[1][6]=[t16 intValue]; conv_quantisation[5][6]=[t56 intValue];
+    conv_quantisation[1][7]=[t17 intValue]; conv_quantisation[5][7]=[t57 intValue];
+    
+    conv_quantisation[2][0]=[t20 intValue]; conv_quantisation[6][0]=[t60 intValue];
+    conv_quantisation[2][1]=[t21 intValue]; conv_quantisation[6][1]=[t61 intValue];
+    conv_quantisation[2][2]=[t22 intValue]; conv_quantisation[6][2]=[t62 intValue];
+    conv_quantisation[2][3]=[t23 intValue]; conv_quantisation[6][3]=[t63 intValue];
+    conv_quantisation[2][4]=[t24 intValue]; conv_quantisation[6][4]=[t64 intValue];
+    conv_quantisation[2][5]=[t25 intValue]; conv_quantisation[6][5]=[t65 intValue];
+    conv_quantisation[2][6]=[t26 intValue]; conv_quantisation[6][6]=[t66 intValue];
+    conv_quantisation[2][7]=[t27 intValue]; conv_quantisation[6][7]=[t67 intValue];
+    
+    conv_quantisation[3][0]=[t30 intValue]; conv_quantisation[7][0]=[t70 intValue];
+    conv_quantisation[3][1]=[t31 intValue]; conv_quantisation[7][1]=[t71 intValue];
+    conv_quantisation[3][2]=[t32 intValue]; conv_quantisation[7][2]=[t72 intValue];
+    conv_quantisation[3][3]=[t33 intValue]; conv_quantisation[7][3]=[t73 intValue];
+    conv_quantisation[3][4]=[t34 intValue]; conv_quantisation[7][4]=[t74 intValue];
+    conv_quantisation[3][5]=[t35 intValue]; conv_quantisation[7][5]=[t75 intValue];
+    conv_quantisation[3][6]=[t36 intValue]; conv_quantisation[7][6]=[t76 intValue];
+    conv_quantisation[3][7]=[t37 intValue]; conv_quantisation[7][7]=[t77 intValue];
     NSBitmapImageRep* imageRepY = [[NSBitmapImageRep alloc] initWithData:[defImage TIFFRepresentation]];
     NSBitmapImageRep* imageRepU = [[NSBitmapImageRep alloc] initWithData:[defImage TIFFRepresentation]];
     NSBitmapImageRep* imageRepV = [[NSBitmapImageRep alloc] initWithData:[defImage TIFFRepresentation]];
