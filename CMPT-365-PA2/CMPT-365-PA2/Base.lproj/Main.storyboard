@@ -797,6 +797,16 @@
                                     <action selector="generateDCT:" target="5gI-5U-AMq" id="wlW-Fm-MlA"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zNo-0b-X6g">
+                                <rect key="frame" x="10" y="120" width="180" height="32"/>
+                                <buttonCell key="cell" type="push" title="IDCT Generate" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="QxU-fV-1tn">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="generateIDCT:" target="5gI-5U-AMq" id="XlD-Jn-wGi"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <connections>

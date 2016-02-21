@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "jmatrix.hpp"
 #include <cmath>
+#define p(x) ((x<0)?x:x)
 
 @implementation ViewController
 
@@ -66,6 +67,12 @@
         1, 2.03211, 0
     };
     Jmatrix conv_rgb(3,3,(double*)a_conv_rgb);
+    double a_conv_ycbcr[]={
+        0.299, 0.587, 0.114,
+        -0.168736, -0.331264, 0.5,
+        0.5, -0.418688, -0.081312
+    };
+    Jmatrix conv_ycbcr(3,3,(double*)a_conv_ycbcr);
     NSBitmapImageRep* imageRepY = [[NSBitmapImageRep alloc] initWithData:[defImage TIFFRepresentation]];
     NSBitmapImageRep* imageRepU = [[NSBitmapImageRep alloc] initWithData:[defImage TIFFRepresentation]];
     NSBitmapImageRep* imageRepV = [[NSBitmapImageRep alloc] initWithData:[defImage TIFFRepresentation]];
@@ -98,7 +105,7 @@
             
             tmp=[NSColor colorWithDeviceRed:imgOriY.val(i,j)   green:imgOriY.val(i,j) blue:imgOriY.val(i,j)  alpha:0];
             [imageRepY setColor:tmp atX:i y:j];
-            tmp=[NSColor colorWithDeviceRed:imgOriU.val(i,j)   green:imgOriU.val(i,j) blue:imgOriU.val(i,j)  alpha:0];
+            tmp=[NSColor colorWithDeviceRed:p(imgOriU.val(i,j))   green:p(imgOriU.val(i,j)) blue:p(imgOriU.val(i,j))  alpha:0];
             [imageRepU setColor:tmp atX:i y:j];
             tmp=[NSColor colorWithDeviceRed:imgOriV.val(i,j)   green:imgOriV.val(i,j) blue:imgOriV.val(i,j)  alpha:0];
             [imageRepV setColor:tmp atX:i y:j];
@@ -114,9 +121,10 @@
 }
 
 - (IBAction)generateDCT:(id)sender; {
-    imgDCTY=imgOriY.dct2_8x8();
-    imgDCTU=imgOriU.dct2_8x8();
-    imgDCTV=imgOriV.dct2_8x8();
+    imgDCTY=imgOriY;
+    imgDCTY=imgOriY.dct2();
+    imgDCTU=imgOriU.dct2();
+    imgDCTV=imgOriV.dct2();
     
     NSBitmapImageRep* imageRepY = [[NSBitmapImageRep alloc] initWithData:[defImage TIFFRepresentation]];
     NSBitmapImageRep* imageRepU = [[NSBitmapImageRep alloc] initWithData:[defImage TIFFRepresentation]];
@@ -141,6 +149,37 @@
     [imgConv7 setImage:imageU];
     NSImage *imageV = [[NSImage alloc] initWithCGImage:[imageRepV CGImage] size:NSMakeSize([imageRepV pixelsWide],[imageRepV pixelsHigh])];
     [imgConv8 setImage:imageV];
+    
+}
+
+- (IBAction)generateIDCT:(id)sender; {
+    imgIDCTY=imgDCTY.idct2();
+    imgIDCTU=imgDCTU.idct2();
+    imgIDCTV=imgDCTV.idct2();
+    
+    NSBitmapImageRep* imageRepY = [[NSBitmapImageRep alloc] initWithData:[defImage TIFFRepresentation]];
+    NSBitmapImageRep* imageRepU = [[NSBitmapImageRep alloc] initWithData:[defImage TIFFRepresentation]];
+    NSBitmapImageRep* imageRepV = [[NSBitmapImageRep alloc] initWithData:[defImage TIFFRepresentation]];
+    
+    for (int i=0;i<[imageRepY pixelsWide];i++)
+        for (int j=0;j<[imageRepY pixelsHigh];j++) {
+            NSColor *tmp;
+            
+            tmp=[NSColor colorWithDeviceRed:imgIDCTY.val(i,j)   green:imgIDCTY.val(i,j) blue:imgIDCTY.val(i,j)  alpha:0];
+            [imageRepY setColor:tmp atX:i y:j];
+            tmp=[NSColor colorWithDeviceRed:imgIDCTU.val(i,j)   green:imgIDCTU.val(i,j) blue:imgIDCTU.val(i,j)  alpha:0];
+            [imageRepU setColor:tmp atX:i y:j];
+            tmp=[NSColor colorWithDeviceRed:imgIDCTV.val(i,j)   green:imgIDCTV.val(i,j) blue:imgIDCTV.val(i,j)  alpha:0];
+            [imageRepV setColor:tmp atX:i y:j];
+            
+        }
+    
+    NSImage *imageY = [[NSImage alloc] initWithCGImage:[imageRepY CGImage] size:NSMakeSize([imageRepY pixelsWide],[imageRepY pixelsHigh])];
+    [imgConv4 setImage:imageY];
+    NSImage *imageU = [[NSImage alloc] initWithCGImage:[imageRepU CGImage] size:NSMakeSize([imageRepU pixelsWide],[imageRepU pixelsHigh])];
+    [imgConv11 setImage:imageU];
+    NSImage *imageV = [[NSImage alloc] initWithCGImage:[imageRepV CGImage] size:NSMakeSize([imageRepV pixelsWide],[imageRepV pixelsHigh])];
+    [imgConv12 setImage:imageV];
     
 }
 @end

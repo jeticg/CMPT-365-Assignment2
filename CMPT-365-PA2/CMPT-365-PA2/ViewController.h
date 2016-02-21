@@ -19,6 +19,10 @@
     Jmatrix imgDCTU;
     Jmatrix imgDCTV;
     
+    Jmatrix imgIDCTY;
+    Jmatrix imgIDCTU;
+    Jmatrix imgIDCTV;
+    
     NSImageView* imgOriginal;
     NSImageView* imgConv1;
     NSImageView* imgConv2;
@@ -57,8 +61,6 @@
 
 - (IBAction)generateYUV:(id)sender;
 - (IBAction)generateDCT:(id)sender;
-
--(void)generateYUV;
--(void)generateDCT;
+- (IBAction)generateIDCT:(id)sender;
 
 @end
