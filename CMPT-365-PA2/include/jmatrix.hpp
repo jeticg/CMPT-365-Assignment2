@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <cstring>
 
-#define MAX_MATRIX 100
+#define MAX_MATRIX 200
 #define max(x,y) (x>y)?x:y
 
 #endif /* jmatrix_hpp */

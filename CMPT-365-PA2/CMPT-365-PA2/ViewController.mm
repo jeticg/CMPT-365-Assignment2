@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "jmatrix.hpp"
-//#import "image.hpp"
+
 
 @implementation ViewController
 
@@ -81,23 +81,27 @@
             c.set(2, [tmp blueComponent]);
             
             c=conv_yuv*c;
-            c.set(1, [[imageRepU colorAtX:i y:((j%2)?j:j-1)] redComponent]);
-            c.set(1, [[imageRepU colorAtX:((i%2)?i:i-1) y:j] redComponent]);
+
+            imgOriY.set(i, j, c.val(0));
+            #ifdef M444
+                imgOriU.set(i, j, c.val(1));
+                imgOriV.set(i, j, c.val(2));
+            #else
+                if (i%2) {
+                    imgOriU.set(i, j, (j%2)?c.val(1):imgOriU.val(i, j-1));
+                    imgOriV.set(i, j, (i%2)?c.val(2):imgOriV.val(i, j-1));
+                } else {
+                    imgOriU.set(i, j, imgOriU.val(i-1, j));
+                    imgOriV.set(i, j, imgOriV.val(i-1, j));
+                }
+            #endif
+
             
-            //Vector y, u, v;
-            //y.set(0, c.val(0));
-            //u.set(1, c.val(1));
-            //v.set(2, c.val(2));
-            //c=conv_rgb*c;
-            //y=conv_rgb*y;
-            //u=conv_rgb*u;
-            //v=conv_rgb*v;
-            
-            tmp=[NSColor colorWithDeviceRed:c.val(0)   green:c.val(0) blue:c.val(0)  alpha:0];
+            tmp=[NSColor colorWithDeviceRed:imgOriY.val(i,j)   green:imgOriY.val(i,j) blue:imgOriY.val(i,j)  alpha:0];
             [imageRepY setColor:tmp atX:i y:j];
-            tmp=[NSColor colorWithDeviceRed:c.val(1)   green:c.val(1) blue:c.val(1)  alpha:0];
+            tmp=[NSColor colorWithDeviceRed:imgOriU.val(i,j)   green:imgOriU.val(i,j) blue:imgOriU.val(i,j)  alpha:0];
             [imageRepU setColor:tmp atX:i y:j];
-            tmp=[NSColor colorWithDeviceRed:c.val(2)   green:c.val(2) blue:c.val(2)  alpha:0];
+            tmp=[NSColor colorWithDeviceRed:imgOriV.val(i,j)   green:imgOriV.val(i,j) blue:imgOriV.val(i,j)  alpha:0];
             [imageRepV setColor:tmp atX:i y:j];
             
         }

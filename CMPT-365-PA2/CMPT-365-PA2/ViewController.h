@@ -7,9 +7,13 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "jmatrix.hpp"
 
 @interface ViewController : NSViewController {
     NSImage *defImage;
+    Jmatrix imgOriY;
+    Jmatrix imgOriU;
+    Jmatrix imgOriV;
     
     NSImageView* imgOriginal;
     NSImageView* imgConv1;
