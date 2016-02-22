@@ -13,7 +13,7 @@
 #include <cstring>
 #include <cmath>
 
-#define MAX_MATRIX 200
+#define MAX_MATRIX 308
 #define max(x,y) (x>y)?x:y
 #define dct_c(x) ((x==0)?sqrt(1/x):sqrt(1/x))
 #define PI 3.1415926536

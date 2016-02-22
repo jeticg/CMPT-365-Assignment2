@@ -63,6 +63,11 @@
     NSTextField* t45; NSTextField* t55; NSTextField* t65; NSTextField* t75;
     NSTextField* t46; NSTextField* t56; NSTextField* t66; NSTextField* t76;
     NSTextField* t47; NSTextField* t57; NSTextField* t67; NSTextField* t77;
+    
+    NSTextField* displayMatrix;
+    NSTextField* displayX;
+    NSTextField* displayY;
+
 }
 @property(retain) IBOutlet NSImageView* imgOriginal;
 @property(retain) IBOutlet NSImageView* imgConv1;
@@ -153,6 +158,10 @@
 @property(retain) IBOutlet NSTextField* t76;
 @property(retain) IBOutlet NSTextField* t77;
 
+@property(retain) IBOutlet NSTextField* displayMatrix;
+@property(retain) IBOutlet NSTextField* displayX;
+@property(retain) IBOutlet NSTextField* displayY;
+
 - (IBAction)generateYUV:(id)sender;
 - (IBAction)generateDCT:(id)sender;
 - (IBAction)generateIDCT:(id)sender;
@@ -166,6 +175,9 @@
 - (IBAction)quanti4:(id)sender;
 - (IBAction)quanti5:(id)sender;
 - (IBAction)openFile:(id)sender;
+
+- (IBAction)displayDCT:(id)sender;
+- (IBAction)displayQUAN:(id)sender;
 
 - (void)loadNewPic:(NSString*)address;
 @end

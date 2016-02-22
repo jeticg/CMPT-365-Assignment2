@@ -33,5 +33,22 @@ int main() {
             if (c[i][j]!=m3.val(i,j)) flag=false;
     if (flag) cout << "--Passed" << endl;
     else cout << "!!Faild" << endl;
+    Jmatrix conv_a;
+    for (int i=0;i<8;i++)
+        for (int j=0;j<8;j++) {
+            double c;
+            if (i==0)
+                c=1/sqrt(8);
+            else
+                c=2/sqrt(8);
+            double value=c*cos((j+0.5)*i*PI/8);
+            conv_a.set(i,j,value);
+        }
+    for (int i=0;i<8;i++) {
+        cout << endl;
+        for (int j=0;j<8;j++)
+            cout << conv_a.val(i,j) << " ";
+    }
+    cout << endl;
     return 0;
 }

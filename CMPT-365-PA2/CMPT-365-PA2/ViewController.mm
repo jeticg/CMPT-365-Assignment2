@@ -10,7 +10,8 @@
 #import "jmatrix.hpp"
 #include <cmath>
 #define ALPHA_VALUE 1
-
+#define YIQ
+//#define M444
 @implementation ViewController
 
 @synthesize imgOriginal;
@@ -87,42 +88,28 @@
     [imgConvRGB     setImage:defImage];
 }
 - (IBAction)generateYUV:(id)sender{
-    /*
+#ifdef YIQ
     double a_conv_yuv[]={
         0.299, 0.587, 0.114,
-        -0.299, -0.587, 0.886,
-        0.701, -0.587, -0.114
+        0.596, -0.274, -0.322,
+        0.211, -0.523, 0.312
     };
+    Jmatrix conv_yuv(3,3,(double*)a_conv_yuv);
+#else
     double a_conv_yuv[]={ //SDTV with BT.601
         0.299, 0.587, 0.114,
         -0.14713, -0.28886, 0.436,
         0.615, -0.51499, -0.10001
     };
-    double a_conv_yuv[]={ //HDTV with BT709
+    Jmatrix conv_yuv(3,3,(double*)a_conv_yuv);
+    
+    double a_conv_yuv2[]={ //HDTV with BT709
         0.2126, 0.7152, 0.0722,
         -0.09991, -0.33609, 0.436,
         0.615, -0.55861, -0.05639
     };
-    */
-    double a_conv_yuv[]={
-        0.299, 0.587, 0.114,
-        -0.299, -0.587, 0.886,
-        0.701, -0.587, -0.114
-    };
-    Jmatrix conv_yuv(3,3,(double*)a_conv_yuv);
-    
-    double a_conv_rgb[]={
-        1, 0, 1.13983,
-        1, -0.39465, -0.58060,
-        1, 2.03211, 0
-    };
-    Jmatrix conv_rgb(3,3,(double*)a_conv_rgb);
-    double a_conv_ycbcr[]={
-        0.299, 0.587, 0.114,
-        -0.168736, -0.331264, 0.5,
-        0.5, -0.418688, -0.081312
-    };
-    Jmatrix conv_ycbcr(3,3,(double*)a_conv_ycbcr);
+    Jmatrix conv_yuv2(3,3,(double*)a_conv_yuv2);
+#endif
     NSBitmapImageRep* imageRepY = [[NSBitmapImageRep alloc] initWithData:[defImage TIFFRepresentation]];
     NSBitmapImageRep* imageRepU = [[NSBitmapImageRep alloc] initWithData:[defImage TIFFRepresentation]];
     NSBitmapImageRep* imageRepV = [[NSBitmapImageRep alloc] initWithData:[defImage TIFFRepresentation]];
@@ -136,17 +123,17 @@
             double B=[tmp blueComponent];
             
             double Y=a_conv_yuv[0]*R+a_conv_yuv[1]*G+a_conv_yuv[2]*B;
-            double U=a_conv_yuv[3]*R+a_conv_yuv[4]*G+a_conv_yuv[5]*B;
-            double V=a_conv_yuv[6]*R+a_conv_yuv[7]*G+a_conv_yuv[8]*B;
+            double U=a_conv_yuv[3]*R+a_conv_yuv[4]*G+a_conv_yuv[5]*B+0.5;
+            double V=a_conv_yuv[6]*R+a_conv_yuv[7]*G+a_conv_yuv[8]*B+0.5;
 
             imgOriY.set(i, j, Y);
             #ifdef M444
                 imgOriU.set(i, j, U);
                 imgOriV.set(i, j, V);
             #else
-                if (i%2) {
-                    imgOriU.set(i, j, (j%2)?U:imgOriU.val(i, j-1));
-                    imgOriV.set(i, j, (i%2)?V:imgOriV.val(i, j-1));
+                if (i%2-1) {
+                    imgOriU.set(i, j, (j%2-1)?U:imgOriU.val(i, j-1));
+                    imgOriV.set(i, j, (j%2-1)?V:imgOriV.val(i, j-1));
                 } else {
                     imgOriU.set(i, j, imgOriU.val(i-1, j));
                     imgOriV.set(i, j, imgOriV.val(i-1, j));
@@ -172,7 +159,6 @@
 }
 
 - (IBAction)generateDCT:(id)sender; {
-    imgDCTY=imgOriY;
     imgDCTY=imgOriY.dct2();
     imgDCTU=imgOriU.dct2();
     imgDCTV=imgOriV.dct2();
@@ -234,12 +220,21 @@
     
 }
 - (IBAction)generateRGB:(id)sender {
+#ifdef YIQ
+    double a_conv_rgb[]={
+        1, 0.956, 0.621,
+        1, -0.272, -0.647,
+        1, -1.106, 0
+    };
+    Jmatrix conv_rgb(3,3,(double*)a_conv_rgb);
+#else //YUV
     double a_conv_rgb[]={
         1, 0, 1.13983,
         1, -0.39465, -0.58060,
         1, 2.03211, 0
     };
     Jmatrix conv_rgb(3,3,(double*)a_conv_rgb);
+#endif
     NSBitmapImageRep* imageRep = [[NSBitmapImageRep alloc] initWithData:[defImage TIFFRepresentation]];
     
     for (int i=0;i<[imageRep pixelsWide];i++)
@@ -247,8 +242,8 @@
             NSColor *tmp=[imageRep colorAtX:i y:j];
             
             double Y = imgIDCTY.val(i, j);
-            double U = imgIDCTU.val(i, j);
-            double V = imgIDCTV.val(i, j);
+            double U = imgIDCTU.val(i, j)-0.5;
+            double V = imgIDCTV.val(i, j)-0.5;
             
             double R=a_conv_rgb[0]*Y+a_conv_rgb[1]*U+a_conv_rgb[2]*V;
             double G=a_conv_rgb[3]*Y+a_conv_rgb[4]*U+a_conv_rgb[5]*V;
@@ -454,7 +449,7 @@
 - (void)openFile:(id)sender {
     NSOpenPanel* openPanel = [NSOpenPanel openPanel];
     
-    openPanel.title = @"Choose a .TXT file";
+    openPanel.title = @"Choose a .jpg file (max size 300*300)";
     openPanel.showsResizeIndicator = YES;
     openPanel.showsHiddenFiles = NO;
     openPanel.canChooseDirectories = NO;
@@ -472,5 +467,29 @@
         }
                           
     }];
+}
+
+
+- (IBAction)displayDCT:(id)sender {
+    NSBitmapImageRep* imageRep = [[NSBitmapImageRep alloc] initWithData:[defImage TIFFRepresentation]];
+    int x=[displayX intValue];
+    int y=[displayY intValue];
+    if (x*8>[imageRep pixelsWide] || y*8>[imageRep pixelsWide]) return;
+    Jmatrix orzY=imgDCTY.sub_8x8_val(x, y);
+    for (int i=0;i<8;i++) {
+        for (int j=0;j<8;j++) orzY.set(i,j,orzY.val(i, j));
+        NSLog(@"%f, %f, %f, %f, %f, %f, %f, %f", orzY.val(i, 0), orzY.val(i, 1), orzY.val(i, 2), orzY.val(i, 3),
+                  orzY.val(i, 4), orzY.val(i, 5), orzY.val(i, 6), orzY.val(i, 7));
+    }
+}
+- (IBAction)displayQUAN:(id)sender {
+    NSBitmapImageRep* imageRep = [[NSBitmapImageRep alloc] initWithData:[defImage TIFFRepresentation]];
+    int x=[displayX intValue];
+    int y=[displayY intValue];
+    if (x*8>[imageRep pixelsWide] || y*8>[imageRep pixelsWide]) return;
+    Jmatrix orzY=imgQUANY.sub_8x8_val(x, y);
+    for (int i=0;i<8;i++)
+        NSLog(@"%lf, %lf, %lf, %lf, %lf, %lf, %lf, %lf", orzY.val(i, 0), orzY.val(i, 1), orzY.val(i, 2), orzY.val(i, 3),
+              orzY.val(i, 4), orzY.val(i, 5), orzY.val(i, 6), orzY.val(i, 7));
 }
 @end

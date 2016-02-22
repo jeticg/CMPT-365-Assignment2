@@ -33,6 +33,10 @@ Jmatrix::Jmatrix() {
 }
 
 Jmatrix::Jmatrix(int init_x, int init_y, const double init_a[]) {
+    if (init_x>=MAX_MATRIX || init_y>=MAX_MATRIX) {
+        printf("Error, matrix cannot be written, max-size exceeded.");
+        return;
+    }
     x_value=init_x;
     y_value=init_y;
     //int size=x*y;
@@ -50,10 +54,18 @@ const int Jmatrix:: y() {
 }
 
 const double  Jmatrix::val(int x, int y) {
+    if (x>=MAX_MATRIX || y>=MAX_MATRIX) {
+        printf("Error, matrix cannot be read, max-size exceeded.");
+        return 0;
+    }
     return a[x][y];
 }
 
 void    Jmatrix::set(int x, int y, double value) {
+    if (x>=MAX_MATRIX || y>=MAX_MATRIX) {
+        printf("Error, matrix cannot be written, max-size exceeded.");
+        return;
+    }
     a[x][y]=value;
     x_value=max(x_value,x+1);
     y_value=max(y_value,y+1);
@@ -176,9 +188,9 @@ Jmatrix Jmatrix::dct2() {
         for (int j=0;j<n;j++) {
             double c;
             if (i==0)
-                c=1/sqrt(n);
+                c=sqrt(1.0/n);
             else
-                c=2/sqrt(n);
+                c=sqrt(2.0/n);
             double value=c*cos((j+0.5)*i*PI/n);
             conv_a.set(i,j,value);
         }
@@ -199,9 +211,9 @@ Jmatrix Jmatrix::idct2() {
         for (int j=0;j<n;j++) {
             double c;
             if (i==0)
-                c=1/sqrt(n);
+                c=sqrt(1.0/n);
             else
-                c=2/sqrt(n);
+                c=sqrt(2.0/n);
             double value=c*cos((j+0.5)*i*PI/n);
             conv_a.set(i,j,value);
         }
