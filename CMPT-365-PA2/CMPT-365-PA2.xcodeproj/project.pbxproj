@@ -40,6 +40,7 @@
 /* Begin PBXFileReference section */
 		E138322C1C76798800291B76 /* default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = default.jpg; sourceTree = "<group>"; };
 		E16B9E0F1C7684A300B39D4A /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		E17323921C7AB557007B3D28 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = de; path = de.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E18341931C79D09C000A57A0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E192A3A01C752C8D00E25FAC /* CMPT-365-PA2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CMPT-365-PA2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E192A3A31C752C8D00E25FAC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -247,6 +248,7 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = E192A3971C752C8D00E25FAC;
 			productRefGroup = E192A3A11C752C8D00E25FAC /* Products */;
@@ -336,6 +338,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				E18341931C79D09C000A57A0 /* en */,
+				E17323921C7AB557007B3D28 /* de */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
