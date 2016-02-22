@@ -10,6 +10,7 @@
 #import "jmatrix.hpp"
 #include <cmath>
 #define ALPHA_VALUE 1
+#define UV_Alteration 0.5
 //#define YIQ
 //#define M444
 @implementation ViewController
@@ -55,7 +56,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadNewPic:@"default.jpg"];
-    IBOutlet NSTextField* quanti[8][8]= {
+    NSTextField* quanti[8][8]= {
         {t00,t01,t02,t03,t04,t05,t06,t07},
         {t10,t11,t12,t13,t14,t15,t16,t17},
         {t20,t21,t22,t23,t24,t25,t26,t27},
@@ -126,8 +127,8 @@
             double B=[tmp blueComponent];
             
             double Y=a_conv_yuv[0]*R+a_conv_yuv[1]*G+a_conv_yuv[2]*B;
-            double U=a_conv_yuv[3]*R+a_conv_yuv[4]*G+a_conv_yuv[5]*B+0.5;
-            double V=a_conv_yuv[6]*R+a_conv_yuv[7]*G+a_conv_yuv[8]*B+0.5;
+            double U=a_conv_yuv[3]*R+a_conv_yuv[4]*G+a_conv_yuv[5]*B+UV_Alteration;
+            double V=a_conv_yuv[6]*R+a_conv_yuv[7]*G+a_conv_yuv[8]*B+UV_Alteration;
 
             imgOriY.set(i, j, Y);
             #ifdef M444
@@ -253,8 +254,8 @@
             NSColor *tmp=[imageRep colorAtX:i y:j];
             
             double Y = imgIDCTY.val(i, j);
-            double U = imgIDCTU.val(i, j)-0.5;
-            double V = imgIDCTV.val(i, j)-0.5;
+            double U = imgIDCTU.val(i, j)-UV_Alteration;
+            double V = imgIDCTV.val(i, j)-UV_Alteration;
             
             double R=a_conv_rgb[0]*Y+a_conv_rgb[1]*U+a_conv_rgb[2]*V;
             double G=a_conv_rgb[3]*Y+a_conv_rgb[4]*U+a_conv_rgb[5]*V;
@@ -271,7 +272,7 @@
 }
 
 - (IBAction)generateQUAN:(id)sender {
-    IBOutlet NSTextField* quanti[8][8]= {
+    NSTextField* quanti[8][8]= {
         {t00,t01,t02,t03,t04,t05,t06,t07},
         {t10,t11,t12,t13,t14,t15,t16,t17},
         {t20,t21,t22,t23,t24,t25,t26,t27},
@@ -295,13 +296,13 @@
             B=imgDCTU.val(i, j)*255;
             C=imgDCTV.val(i, j)*255;
             
-            A/=[quanti[i%8][j%8] intValue];
-            B/=[quanti[i%8][j%8] intValue];
-            C/=[quanti[i%8][j%8] intValue];
+            A/=([quanti[i%8][j%8] intValue]==0)?1:[quanti[i%8][j%8] intValue];
+            B/=([quanti[i%8][j%8] intValue]==0)?1:[quanti[i%8][j%8] intValue];
+            C/=([quanti[i%8][j%8] intValue]==0)?1:[quanti[i%8][j%8] intValue];
             
-            A*=[quanti[i%8][j%8] intValue];
-            B*=[quanti[i%8][j%8] intValue];
-            C*=[quanti[i%8][j%8] intValue];
+            A*=([quanti[i%8][j%8] intValue]==0)?1:[quanti[i%8][j%8] intValue];
+            B*=([quanti[i%8][j%8] intValue]==0)?1:[quanti[i%8][j%8] intValue];
+            C*=([quanti[i%8][j%8] intValue]==0)?1:[quanti[i%8][j%8] intValue];
             
             imgQUANY.set(i, j, (double)A/255);
             imgQUANU.set(i, j, (double)B/255);
@@ -334,7 +335,7 @@
 }
 
 - (IBAction)quanti0:(id)sender {
-    IBOutlet NSTextField* quanti[8][8]= {
+    NSTextField* quanti[8][8]= {
         {t00,t01,t02,t03,t04,t05,t06,t07},
         {t10,t11,t12,t13,t14,t15,t16,t17},
         {t20,t21,t22,t23,t24,t25,t26,t27},
@@ -362,7 +363,7 @@
             [quanti[i][j] setIntValue:tmp[i][j] ];
 }
 - (IBAction)quanti1:(id)sender {
-    IBOutlet NSTextField* quanti[8][8]= {
+    NSTextField* quanti[8][8]= {
         {t00,t01,t02,t03,t04,t05,t06,t07},
         {t10,t11,t12,t13,t14,t15,t16,t17},
         {t20,t21,t22,t23,t24,t25,t26,t27},
@@ -390,7 +391,7 @@
             [quanti[i][j] setIntValue:tmp[i][j] ];
 }
 - (IBAction)quanti2:(id)sender {
-    IBOutlet NSTextField* quanti[8][8]= {
+    NSTextField* quanti[8][8]= {
         {t00,t01,t02,t03,t04,t05,t06,t07},
         {t10,t11,t12,t13,t14,t15,t16,t17},
         {t20,t21,t22,t23,t24,t25,t26,t27},
@@ -418,7 +419,7 @@
             [quanti[i][j] setIntValue:tmp[i][j] ];
 }
 - (IBAction)quanti3:(id)sender {
-    IBOutlet NSTextField* quanti[8][8]= {
+    NSTextField* quanti[8][8]= {
         {t00,t01,t02,t03,t04,t05,t06,t07},
         {t10,t11,t12,t13,t14,t15,t16,t17},
         {t20,t21,t22,t23,t24,t25,t26,t27},
@@ -434,7 +435,7 @@
             [quanti[i][j] setIntValue:32 ];
 }
 - (IBAction)quanti4:(id)sender {
-    IBOutlet NSTextField* quanti[8][8]= {
+    NSTextField* quanti[8][8]= {
         {t00,t01,t02,t03,t04,t05,t06,t07},
         {t10,t11,t12,t13,t14,t15,t16,t17},
         {t20,t21,t22,t23,t24,t25,t26,t27},
@@ -450,7 +451,7 @@
             [quanti[i][j] setIntValue:2 ];
 }
 - (IBAction)quanti5:(id)sender {
-    IBOutlet NSTextField* quanti[8][8]= {
+    NSTextField* quanti[8][8]= {
         {t00,t01,t02,t03,t04,t05,t06,t07},
         {t10,t11,t12,t13,t14,t15,t16,t17},
         {t20,t21,t22,t23,t24,t25,t26,t27},
@@ -515,7 +516,7 @@
     [displayMatrix setStringValue:tmp];
 }
 - (IBAction)displayQUAN:(id)sender {
-    IBOutlet NSTextField* quanti[8][8]= {
+    NSTextField* quanti[8][8]= {
         {t00,t01,t02,t03,t04,t05,t06,t07},
         {t10,t11,t12,t13,t14,t15,t16,t17},
         {t20,t21,t22,t23,t24,t25,t26,t27},
