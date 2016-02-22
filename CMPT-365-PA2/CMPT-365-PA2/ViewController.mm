@@ -127,8 +127,8 @@
             double B=[tmp blueComponent];
             
             double Y=a_conv_yuv[0]*R+a_conv_yuv[1]*G+a_conv_yuv[2]*B;
-            double U=a_conv_yuv[3]*R+a_conv_yuv[4]*G+a_conv_yuv[5]*B+UV_Alteration;
-            double V=a_conv_yuv[6]*R+a_conv_yuv[7]*G+a_conv_yuv[8]*B+UV_Alteration;
+            double U=a_conv_yuv[3]*R+a_conv_yuv[4]*G+a_conv_yuv[5]*B;
+            double V=a_conv_yuv[6]*R+a_conv_yuv[7]*G+a_conv_yuv[8]*B;
 
             imgOriY.set(i, j, Y);
             #ifdef M444
@@ -147,9 +147,9 @@
             
             tmp=[NSColor colorWithDeviceRed:imgOriY.val(i,j)   green:imgOriY.val(i,j) blue:imgOriY.val(i,j)  alpha:ALPHA_VALUE];
             [imageRepY setColor:tmp atX:i y:j];
-            tmp=[NSColor colorWithDeviceRed:imgOriU.val(i,j)   green:imgOriU.val(i,j) blue:imgOriU.val(i,j)  alpha:ALPHA_VALUE];
+            tmp=[NSColor colorWithDeviceRed:imgOriU.val(i,j)+UV_Alteration   green:imgOriU.val(i,j)+UV_Alteration blue:imgOriU.val(i,j)+UV_Alteration  alpha:ALPHA_VALUE];
             [imageRepU setColor:tmp atX:i y:j];
-            tmp=[NSColor colorWithDeviceRed:imgOriV.val(i,j)   green:imgOriV.val(i,j) blue:imgOriV.val(i,j)  alpha:ALPHA_VALUE];
+            tmp=[NSColor colorWithDeviceRed:imgOriV.val(i,j)+UV_Alteration   green:imgOriV.val(i,j)+UV_Alteration blue:imgOriV.val(i,j)+UV_Alteration  alpha:ALPHA_VALUE];
             [imageRepV setColor:tmp atX:i y:j];
             
         }
@@ -216,9 +216,9 @@
             
             tmp=[NSColor colorWithDeviceRed:imgIDCTY.val(i,j)   green:imgIDCTY.val(i,j) blue:imgIDCTY.val(i,j)  alpha:ALPHA_VALUE];
             [imageRepY setColor:tmp atX:i y:j];
-            tmp=[NSColor colorWithDeviceRed:imgIDCTU.val(i,j)   green:imgIDCTU.val(i,j) blue:imgIDCTU.val(i,j)  alpha:ALPHA_VALUE];
+            tmp=[NSColor colorWithDeviceRed:imgIDCTU.val(i,j)+UV_Alteration   green:imgIDCTU.val(i,j)+UV_Alteration blue:imgIDCTU.val(i,j)+UV_Alteration  alpha:ALPHA_VALUE];
             [imageRepU setColor:tmp atX:i y:j];
-            tmp=[NSColor colorWithDeviceRed:imgIDCTV.val(i,j)   green:imgIDCTV.val(i,j) blue:imgIDCTV.val(i,j)  alpha:ALPHA_VALUE];
+            tmp=[NSColor colorWithDeviceRed:imgIDCTV.val(i,j)+UV_Alteration   green:imgIDCTV.val(i,j)+UV_Alteration blue:imgIDCTV.val(i,j)+UV_Alteration  alpha:ALPHA_VALUE];
             [imageRepV setColor:tmp atX:i y:j];
             
         }
@@ -254,8 +254,8 @@
             NSColor *tmp=[imageRep colorAtX:i y:j];
             
             double Y = imgIDCTY.val(i, j);
-            double U = imgIDCTU.val(i, j)-UV_Alteration;
-            double V = imgIDCTV.val(i, j)-UV_Alteration;
+            double U = imgIDCTU.val(i, j);
+            double V = imgIDCTV.val(i, j);
             
             double R=a_conv_rgb[0]*Y+a_conv_rgb[1]*U+a_conv_rgb[2]*V;
             double G=a_conv_rgb[3]*Y+a_conv_rgb[4]*U+a_conv_rgb[5]*V;
