@@ -814,7 +814,7 @@
                                 <rect key="frame" x="1085" y="106" width="218" height="156"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" id="1vY-ld-3V1">
                                     <font key="font" metaFont="system"/>
-                                    <mutableString key="title">Help: 1. Click on the button on the left side to perform action 2. Select different Quantisation Matrix to see different results 3. You can modify the values in the Quantisation Matrix to your desire. 4. Specify the coordinates of 8x8 block below to see detail</mutableString>
+                                    <string key="title">Help: 1. Click on the button on the left side to perform action 2. Select different Quantisation Matrix to see different results 3. You can modify the values in the Quantisation Matrix to your desire. 4. Specify the coordinates of 8x8 block below to see detail</string>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -837,17 +837,9 @@
                                     <action selector="openFile:" target="5gI-5U-AMq" id="OYM-Ls-3eW"/>
                                 </connections>
                             </button>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Qv-Bm-bOO">
-                                <rect key="frame" x="839" y="22" width="240" height="240"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" borderStyle="border" id="BSw-pC-zMY">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="faw-KC-kSI">
                                 <rect key="frame" x="1099" y="76" width="96" height="22"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="ML8-IF-gqh">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" title="0" drawsBackground="YES" id="ML8-IF-gqh">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -855,7 +847,7 @@
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PU3-GS-tmi">
                                 <rect key="frame" x="1203" y="76" width="96" height="22"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="CGn-Bk-W6n">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" title="0" drawsBackground="YES" id="CGn-Bk-W6n">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -889,10 +881,18 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gFn-Nh-AaI">
+                                <rect key="frame" x="827" y="22" width="240" height="240"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="vZv-wr-WZ6">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                     </view>
                     <connections>
-                        <outlet property="displayMatrix" destination="2Qv-Bm-bOO" id="atK-oz-exk"/>
+                        <outlet property="displayMatrix" destination="gFn-Nh-AaI" id="oQd-sj-s0v"/>
                         <outlet property="displayX" destination="faw-KC-kSI" id="RVc-Ci-nIB"/>
                         <outlet property="displayY" destination="PU3-GS-tmi" id="xbj-n2-ype"/>
                         <outlet property="imgConv1" destination="VA7-lu-Bim" id="YQN-rF-hpR"/>
@@ -977,6 +977,7 @@
                     </connections>
                 </viewController>
                 <customObject id="2Tp-Fl-jBw" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController representsSharedInstance="YES" id="MSc-Kb-VVh"/>
             </objects>
             <point key="canvasLocation" x="-35.5" y="977"/>
         </scene>

@@ -42,8 +42,8 @@ public:
     Jmatrix operator*(const Jmatrix& m);
     Jmatrix T();
     operator Vector();
-    Jmatrix sub_8x8_val(int x, int y);
-    void    sub_8x8_rep(int x, int y, const Jmatrix& m);
+    Jmatrix sub_8x8_val(int x, int y); //return a 8x8 submatrix
+    void    sub_8x8_rep(int x, int y, const Jmatrix& m); //write the data from a 8x8 matrix to a 8x8 block
     Jmatrix dct2();
     Jmatrix idct2();
 };

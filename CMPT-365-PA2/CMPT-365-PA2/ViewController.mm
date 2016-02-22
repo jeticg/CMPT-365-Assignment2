@@ -10,7 +10,7 @@
 #import "jmatrix.hpp"
 #include <cmath>
 #define ALPHA_VALUE 1
-#define YIQ
+//#define YIQ
 //#define M444
 @implementation ViewController
 
@@ -48,6 +48,9 @@
 @synthesize t45; @synthesize t55; @synthesize t65; @synthesize t75;
 @synthesize t46; @synthesize t56; @synthesize t66; @synthesize t76;
 @synthesize t47; @synthesize t57; @synthesize t67; @synthesize t77;
+@synthesize displayX;
+@synthesize displayY;
+@synthesize displayMatrix;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -476,20 +479,57 @@
     int y=[displayY intValue];
     if (x*8>[imageRep pixelsWide] || y*8>[imageRep pixelsWide]) return;
     Jmatrix orzY=imgDCTY.sub_8x8_val(x, y);
-    for (int i=0;i<8;i++) {
-        for (int j=0;j<8;j++) orzY.set(i,j,orzY.val(i, j));
-        NSLog(@"%f, %f, %f, %f, %f, %f, %f, %f", orzY.val(i, 0), orzY.val(i, 1), orzY.val(i, 2), orzY.val(i, 3),
-                  orzY.val(i, 4), orzY.val(i, 5), orzY.val(i, 6), orzY.val(i, 7));
-    }
+    int a[8][8];
+    for (int i=0;i<8;i++)
+        for (int j=0;j<8;j++)
+            a[i][j]=orzY.val(i, j)*255;
+    int i=0;
+    NSString *tmp=[[NSString alloc]initWithFormat:@"%4d, %4d, %4d, %4d, %4d, %4d, %4d, %4d\n %4d, %4d, %4d, %4d, %4d, %4d, %4d, %4d\n %4d, %4d, %4d, %4d, %4d, %4d, %4d, %4d\n %4d, %4d, %4d, %4d, %4d, %4d, %4d, %4d\n %4d, %4d, %4d, %4d, %4d, %4d, %4d, %4d\n %4d, %4d, %4d, %4d, %4d, %4d, %4d, %4d\n %4d, %4d, %4d, %4d, %4d, %4d, %4d, %4d\n %4d, %4d, %4d, %4d, %4d, %4d, %4d, %4d\n",
+        a[i][0], a[i][1], a[i][2], a[i][3], a[i][4], a[i][5], a[i][6], a[i++][7],
+        a[i][0], a[i][1], a[i][2], a[i][3], a[i][4], a[i][5], a[i][6], a[i++][7],
+        a[i][0], a[i][1], a[i][2], a[i][3], a[i][4], a[i][5], a[i][6], a[i++][7],
+        a[i][0], a[i][1], a[i][2], a[i][3], a[i][4], a[i][5], a[i][6], a[i++][7],
+        
+        a[i][0], a[i][1], a[i][2], a[i][3], a[i][4], a[i][5], a[i][6], a[i++][7],
+        a[i][0], a[i][1], a[i][2], a[i][3], a[i][4], a[i][5], a[i][6], a[i++][7],
+        a[i][0], a[i][1], a[i][2], a[i][3], a[i][4], a[i][5], a[i][6], a[i++][7],
+        a[i][0], a[i][1], a[i][2], a[i][3], a[i][4], a[i][5], a[i][6], a[i++][7]
+    ];
+    [displayMatrix setStringValue:tmp];
 }
 - (IBAction)displayQUAN:(id)sender {
+    IBOutlet NSTextField* quanti[8][8]= {
+        {t00,t01,t02,t03,t04,t05,t06,t07},
+        {t10,t11,t12,t13,t14,t15,t16,t17},
+        {t20,t21,t22,t23,t24,t25,t26,t27},
+        {t30,t31,t32,t33,t34,t35,t36,t37},
+        
+        {t40,t41,t42,t43,t44,t45,t46,t47},
+        {t50,t51,t52,t53,t54,t55,t56,t57},
+        {t60,t61,t62,t63,t64,t65,t66,t67},
+        {t70,t71,t72,t73,t74,t75,t76,t77}
+    };
     NSBitmapImageRep* imageRep = [[NSBitmapImageRep alloc] initWithData:[defImage TIFFRepresentation]];
     int x=[displayX intValue];
     int y=[displayY intValue];
     if (x*8>[imageRep pixelsWide] || y*8>[imageRep pixelsWide]) return;
     Jmatrix orzY=imgQUANY.sub_8x8_val(x, y);
+    int a[8][8];
     for (int i=0;i<8;i++)
-        NSLog(@"%lf, %lf, %lf, %lf, %lf, %lf, %lf, %lf", orzY.val(i, 0), orzY.val(i, 1), orzY.val(i, 2), orzY.val(i, 3),
-              orzY.val(i, 4), orzY.val(i, 5), orzY.val(i, 6), orzY.val(i, 7));
+        for (int j=0;j<8;j++)
+            a[i][j]=orzY.val(i, j)*255/[quanti[i][j] intValue];
+    int i=0;
+    NSString *tmp=[[NSString alloc]initWithFormat:@"%4d, %4d, %4d, %4d, %4d, %4d, %4d, %4d\n %4d, %4d, %4d, %4d, %4d, %4d, %4d, %4d\n %4d, %4d, %4d, %4d, %4d, %4d, %4d, %4d\n %4d, %4d, %4d, %4d, %4d, %4d, %4d, %4d\n %4d, %4d, %4d, %4d, %4d, %4d, %4d, %4d\n %4d, %4d, %4d, %4d, %4d, %4d, %4d, %4d\n %4d, %4d, %4d, %4d, %4d, %4d, %4d, %4d\n %4d, %4d, %4d, %4d, %4d, %4d, %4d, %4d\n",
+                   a[i][0], a[i][1], a[i][2], a[i][3], a[i][4], a[i][5], a[i][6], a[i++][7],
+                   a[i][0], a[i][1], a[i][2], a[i][3], a[i][4], a[i][5], a[i][6], a[i++][7],
+                   a[i][0], a[i][1], a[i][2], a[i][3], a[i][4], a[i][5], a[i][6], a[i++][7],
+                   a[i][0], a[i][1], a[i][2], a[i][3], a[i][4], a[i][5], a[i][6], a[i++][7],
+                   
+                   a[i][0], a[i][1], a[i][2], a[i][3], a[i][4], a[i][5], a[i][6], a[i++][7],
+                   a[i][0], a[i][1], a[i][2], a[i][3], a[i][4], a[i][5], a[i][6], a[i++][7],
+                   a[i][0], a[i][1], a[i][2], a[i][3], a[i][4], a[i][5], a[i][6], a[i++][7],
+                   a[i][0], a[i][1], a[i][2], a[i][3], a[i][4], a[i][5], a[i][6], a[i++][7]
+                   ];
+    [displayMatrix setStringValue:tmp];
 }
 @end
