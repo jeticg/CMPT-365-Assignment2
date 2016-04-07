@@ -13,8 +13,10 @@
 #include <cstring>
 #include <cmath>
 #include <stdarg.h>
+#include <vector>
+using std::vector;
 
-#define MAX_MATRIX 308
+#define MAX_MATRIX 64
 #define max(x,y) (x>y)?x:y
 #define min(x,y) (x<y)?x:y
 #define dct_c(x) ((x==0)?sqrt(1/x):sqrt(1/x))
@@ -28,7 +30,7 @@ class Jvector;
 class Jmatrix {
 private:
     int x_value, y_value;      //size of the matrix
-    double a[MAX_MATRIX][MAX_MATRIX];   //intity of the matrix
+    vector <vector <double> > a;   //intity of the matrix
     void shrink();                      //remove rows and columns containing zero only;
 public:
     Jmatrix();
@@ -62,7 +64,7 @@ public:
     operator Jvector();
     //Jmatrix sub_8x8_val(int x, int y); //return a 8x8 submatrix
     //void    sub_8x8_rep(int x, int y, const Jmatrix& m); //write the data from a nxn matrix to a nxn block
-    Jmatrix sub_val(int n, int x, int y); //return a nxn submatrix
+    Jmatrix sub_val(int n, int x, int y)const; //return a nxn submatrix
     void    sub_rep(int n, int x, int y, const Jmatrix& m); //write the data from a nxn matrix to a nxn block
 
     Jmatrix dct2();
@@ -102,6 +104,7 @@ public:
     Jvector& normal()const;
 };
 
+Jmatrix strassen(const Jmatrix& A, const Jmatrix& B);
 const void printJmatrix(Jvector m);
 const void printJmatrix(Jmatrix m);
 
