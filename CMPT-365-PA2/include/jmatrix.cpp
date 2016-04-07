@@ -25,7 +25,7 @@ void Jmatrix::shrink() {
     while (flag) {
         if (x_value==0) break;
         for (int i=0;i<y();i++)
-            if (a[x_value-1][i]!=0) {flag=false;break;}
+            if (a[x_value-1][i]>FLOAT_DELTA || a[x_value-1][i]<-FLOAT_DELTA) {flag=false;break;}
         if (flag) {
             x_value--;
             a.resize(x_value);
@@ -79,7 +79,7 @@ void    Jmatrix::set(int x, int y, double value) {
     a[x][y]=value;
     x_value=max(x_value,x+1);
     y_value=max(y_value,y+1);
-    //if ((x+1==x_value || y+1==y_value) && value>=-FLOAT_DELTA && value<=FLOAT_DELTA) shrink();
+    if ((x+1==x_value || y+1==y_value) && value>=-FLOAT_DELTA && value<=FLOAT_DELTA) shrink();
 }
 
 //  Constructors
