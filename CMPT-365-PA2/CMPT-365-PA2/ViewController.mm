@@ -93,26 +93,25 @@
 }
 - (IBAction)generateYUV:(id)sender{
 #ifdef YIQ
-    double a_conv_yuv[]={
-        0.299, 0.587, 0.114,
-        0.596, -0.274, -0.322,
-        0.211, -0.523, 0.312
-    };
-    Jmatrix conv_yuv(3,3,(double*)a_conv_yuv);
+    Jmatrix conv_yuv(3,3,
+                     0.299, 0.587, 0.114,
+                     0.596, -0.274, -0.322,
+                     0.211, -0.523, 0.312
+                     );
 #else
-    double a_conv_yuv[]={ //SDTV with BT.601
-        0.299, 0.587, 0.114,
-        -0.14713, -0.28886, 0.436,
-        0.615, -0.51499, -0.10001
-    };
-    Jmatrix conv_yuv(3,3,(double*)a_conv_yuv);
+    //SDTV with BT.601
+    Jmatrix conv_yuv(3,3,
+                     0.299, 0.587, 0.114,
+                     -0.14713, -0.28886, 0.436,
+                     0.615, -0.51499, -0.10001
+                     );
     
-    double a_conv_yuv2[]={ //HDTV with BT709
-        0.2126, 0.7152, 0.0722,
-        -0.09991, -0.33609, 0.436,
-        0.615, -0.55861, -0.05639
-    };
-    Jmatrix conv_yuv2(3,3,(double*)a_conv_yuv2);
+    //HDTV with BT709
+    Jmatrix conv_yuv2(3,3,
+                      0.2126, 0.7152, 0.0722,
+                      -0.09991, -0.33609, 0.436,
+                      0.615, -0.55861, -0.05639
+                      );
 #endif
     NSBitmapImageRep* imageRepY = [[NSBitmapImageRep alloc] initWithData:[defImage TIFFRepresentation]];
     NSBitmapImageRep* imageRepU = [[NSBitmapImageRep alloc] initWithData:[defImage TIFFRepresentation]];
@@ -126,9 +125,9 @@
             double G=[tmp greenComponent];
             double B=[tmp blueComponent];
             
-            double Y=a_conv_yuv[0]*R+a_conv_yuv[1]*G+a_conv_yuv[2]*B;
-            double U=a_conv_yuv[3]*R+a_conv_yuv[4]*G+a_conv_yuv[5]*B;
-            double V=a_conv_yuv[6]*R+a_conv_yuv[7]*G+a_conv_yuv[8]*B;
+            double Y=conv_yuv.val(0,0)*R+conv_yuv.val(0,1)*G+conv_yuv.val(0,2)*B;
+            double U=conv_yuv.val(1,0)*R+conv_yuv.val(1,1)*G+conv_yuv.val(1,2)*B;
+            double V=conv_yuv.val(2,0)*R+conv_yuv.val(2,1)*G+conv_yuv.val(2,2)*B;
 
             imgOriY.set(i, j, Y);
             #ifdef M444
@@ -233,19 +232,17 @@
 }
 - (IBAction)generateRGB:(id)sender {
 #ifdef YIQ
-    double a_conv_rgb[]={
-        1, 0.956, 0.621,
-        1, -0.272, -0.647,
-        1, -1.106, 0
-    };
-    Jmatrix conv_rgb(3,3,(double*)a_conv_rgb);
+    Jmatrix conv_rgb(3,3,
+                     1.0, 0.956, 0.621,
+                     1.0, -0.272, -0.647,
+                     1.0, -1.106, 0.0
+                     );
 #else //YUV
-    double a_conv_rgb[]={
-        1, 0, 1.13983,
-        1, -0.39465, -0.58060,
-        1, 2.03211, 0
-    };
-    Jmatrix conv_rgb(3,3,(double*)a_conv_rgb);
+    Jmatrix conv_rgb(3,3,
+                     1.0, 0.0, 1.13983,
+                     1.0, -0.39465, -0.58060,
+                     1.0, 2.03211, 0.0
+                     );
 #endif
     NSBitmapImageRep* imageRep = [[NSBitmapImageRep alloc] initWithData:[defImage TIFFRepresentation]];
     
@@ -257,9 +254,9 @@
             double U = imgIDCTU.val(i, j);
             double V = imgIDCTV.val(i, j);
             
-            double R=a_conv_rgb[0]*Y+a_conv_rgb[1]*U+a_conv_rgb[2]*V;
-            double G=a_conv_rgb[3]*Y+a_conv_rgb[4]*U+a_conv_rgb[5]*V;
-            double B=a_conv_rgb[6]*Y+a_conv_rgb[7]*U+a_conv_rgb[8]*V;
+            double R=conv_rgb.val(0, 0)*Y+conv_rgb.val(0, 1)*U+conv_rgb.val(0, 2)*V;
+            double G=conv_rgb.val(1, 0)*Y+conv_rgb.val(1, 1)*U+conv_rgb.val(1, 2)*V;
+            double B=conv_rgb.val(2, 0)*Y+conv_rgb.val(2, 1)*U+conv_rgb.val(2, 2)*V;
 
             
             tmp=[NSColor colorWithDeviceRed:R   green:G blue:B  alpha:ALPHA_VALUE];
@@ -496,7 +493,7 @@
     int x=[displayX intValue];
     int y=[displayY intValue];
     if (x*8>[imageRep pixelsWide] || y*8>[imageRep pixelsWide]) return;
-    Jmatrix orzY=imgDCTY.sub_8x8_val(x, y);
+    Jmatrix orzY=imgDCTY.sub_val(8, x, y);
     int a[8][8];
     for (int i=0;i<8;i++)
         for (int j=0;j<8;j++)
@@ -531,7 +528,7 @@
     int x=[displayX intValue];
     int y=[displayY intValue];
     if (x*8>[imageRep pixelsWide] || y*8>[imageRep pixelsWide]) return;
-    Jmatrix orzY=imgQUANY.sub_8x8_val(x, y);
+    Jmatrix orzY=imgQUANY.sub_val(8, x, y);
     int a[8][8];
     for (int i=0;i<8;i++)
         for (int j=0;j<8;j++)
