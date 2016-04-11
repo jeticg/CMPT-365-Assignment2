@@ -35,7 +35,7 @@ void Jmatrix::shrink() {
     while (flag) {
         if (y_value==0) break;
         for (int i=0;i<x();i++)
-            if (a[i][y_value-1]!=0) {flag=false;break;}
+            if (a[i][y_value-1]>FLOAT_DELTA || a[i][y_value-1]<-FLOAT_DELTA) {flag=false;break;}
         if (flag) y_value--;
     }
     for (int i=0;i<x_value;i++) {
@@ -87,14 +87,19 @@ Jmatrix::Jmatrix() {
     x_value=0; y_value=0;
 }
 
+Jmatrix::~Jmatrix() {
+    a.clear();
+    vector <vector <double> >(a).swap(a);
+}
+
 Jmatrix::Jmatrix(int init_x, int init_y, const double init_a[]) {
     x_value=0; y_value=0;
     if (init_x<0 || init_y<0) {
         printf("Error 1, matrix cannot be written, min-size exceeded.");
         return;
     }
-    for (int i=0;i<x_value;i++)
-        for (int j=0;j<y_value;j++)
+    for (int i=x_value-1;i>=0;i--)
+        for (int j=y_value-1;j>=0;j--)
             set(i,j,init_a[i*y()+j]);
 }
 
@@ -128,75 +133,86 @@ bool    Jmatrix:: operator==(const Jmatrix& m)const {
     return true;
 }
 
-Jmatrix& Jmatrix:: operator+(const Jmatrix& m)const{
-    Jmatrix* result=new Jmatrix;
+bool    Jmatrix:: operator!=(const Jmatrix& m)const {
+    for (int i=max(x(),m.x());i>=0;i--)
+        for (int j=max(y(),m.y());j>=0;j--)
+            if (val(i,j)-m.val(i,j)<-FLOAT_DELTA || val(i,j)-m.val(i,j)>FLOAT_DELTA)
+                return true;
+    return false;
+}
+
+Jmatrix Jmatrix:: operator+(const Jmatrix& m)const{
+    Jmatrix result;
     //
     for (int i=max(x(),m.x());i>=0;i--)
         for (int j=max(y(),m.y());j>=0;j--)
-            result->set(i,j, val(i,j)+m.val(i,j));
+            result.set(i,j, val(i,j)+m.val(i,j));
     //
-    return *result;
+    return result;
 }
 Jmatrix& Jmatrix::operator+=(const Jmatrix& m) {
-    *this=*this + m;
+    for (int i=max(x(),m.x());i>=0;i--)
+        for (int j=max(y(),m.y());j>=0;j--)
+            set(i,j, val(i,j)+m.val(i,j));
     return *this;
 }
 
-Jmatrix& Jmatrix:: operator-(const Jmatrix& m)const {
-    Jmatrix* result=new Jmatrix;
+Jmatrix Jmatrix:: operator-(const Jmatrix& m)const {
+    Jmatrix result;
     //
     for (int i=max(x(),m.x());i>=0;i--)
         for (int j=max(y(),m.y());j>=0;j--)
-            result->set(i,j, val(i,j)-m.val(i,j));
+            result.set(i,j, val(i,j)-m.val(i,j));
     //
-    return *result;
+    return result;
 }
 Jmatrix& Jmatrix::operator-=(const Jmatrix&    m) {
-    *this=*this - m;
+    for (int i=max(x(),m.x());i>=0;i--)
+        for (int j=max(y(),m.y());j>=0;j--)
+            set(i,j, val(i,j)-m.val(i,j));
     return *this;
 }
 
-Jmatrix& Jmatrix:: operator*(const Jmatrix& m)const {
-    Jmatrix* result=new Jmatrix;
+Jmatrix Jmatrix:: operator*(const Jmatrix& m)const {
+    Jmatrix result;
     //
     int tmp=max(y(), m.x());
-    for (int i=0;i<x();i++)
-        for (int j=0;j<m.y();j++) {
-            result->set(i,j,0);
+    for (int i=x()-1;i>=0;i--)
+        for (int j=m.y()-1;j>=0;j--) {
+            result.set(i,j,0);
             for (int k=0;k<tmp;k++)
-                result->set(i,j,result->val(i,j)+val(i,k)*m.val(k,j));
+                result.set(i,j,result.val(i,j)+val(i,k)*m.val(k,j));
         }
     //
-    result->shrink();
-    return *result;
+    return result;
 }
 Jmatrix& Jmatrix::operator*=(const Jmatrix&    m) {
     *this=*this * m;
     return *this;
 }
 
-Jmatrix& Jmatrix:: operator*(const double&  m)const {
-    Jmatrix *result=new Jmatrix;
+Jmatrix Jmatrix:: operator*(const double&  m)const {
+    Jmatrix result;
     //
     for (int i=x();i>=0;i--)
         for (int j=y();j>=0;j--)
-            result->set(i,j, val(i,j)*m);
+            result.set(i,j, val(i,j)*m);
     //
-    return *result;
+    return result;
 }
 Jmatrix& Jmatrix::operator*=(const double&    m) {
     *this=*this * m;
     return *this;
 }
 
-Jmatrix& Jmatrix:: operator/(const double&  m)const {
-    Jmatrix *result=new Jmatrix;
+Jmatrix Jmatrix:: operator/(const double&  m)const {
+    Jmatrix result;
     //
     for (int i=x();i>=0;i--)
         for (int j=y();j>=0;j--)
-            result->set(i,j, val(i,j)/m);
+            result.set(i,j, val(i,j)/m);
     //
-    return *result;
+    return result;
 }
 Jmatrix& Jmatrix::operator/=(const double&    m) {
     *this=*this / m;
@@ -214,62 +230,46 @@ Jmatrix Jmatrix::T()const {
 }
 
 Jmatrix::operator Jvector() {
-    Jvector* result=new Jvector;
+    Jvector result;
     //
     for (int i=0;i<x();i++)
-        result->set(i,val(i,0));
-    //
-    return *result;
-}
-/*
-Jmatrix Jmatrix::sub_8x8_val(int x, int y) {
-    Jmatrix result; int n=8;
-    //
-    for (int i=0;i<n;i++)
-        for (int j=0;j<n;j++)
-            result.set(i, j, val(x+i,y+j));
+        result.set(i,val(i,0));
     //
     return result;
 }
-void    Jmatrix::sub_8x8_rep(int x, int y, const Jmatrix& m) {
-    int n=8;
-    for (int i=0;i<n;i++)
-        for (int j=0;j<n;j++)
-            set(x+i, y+j, m.val(i,j));
-}
-*/
+
 Jmatrix Jmatrix::sub_val(int n, int x, int y)const {
     Jmatrix result;
     //
-    for (int i=0;i<n;i++)
-        for (int j=0;j<n;j++)
+    for (int i=n-1;i>=0;i--)
+        for (int j=n-1;j>=0;j--)
             result.set(i, j, val(x+i,y+j));
     //
     return result;
 }
 void    Jmatrix::sub_rep(int n, int x, int y, const Jmatrix& m) {
-    for (int i=0;i<n;i++)
-        for (int j=0;j<n;j++)
+    for (int i=n-1;i>=0;i--)
+        for (int j=n-1;j>=0;j--)
             set(x+i, y+j, m.val(i,j));
 }
 
 Jmatrix Jmatrix::dct2() {
-    Jmatrix result=*this;
+    Jmatrix result;
     //
     for (int i=0;i<x();i+=8) {
         for (int j=0; j<y(); j+=8) {
-            result.sub_rep(8, i, j, conv_dct*result.sub_val(8, i, j)*conv_dct.T());
+            result.sub_rep(8, i, j, conv_dct*this->sub_val(8, i, j)*conv_dct.T());
         }
     }
     return result;
 }
 
 Jmatrix Jmatrix::idct2() {
-    Jmatrix result=*this;
+    Jmatrix result;
     //
     for (int i=0;i<x();i+=8) {
         for (int j=0; j<y(); j+=8) {
-            result.sub_rep(8, i, j, conv_dct.T()*result.sub_val(8, i, j)*conv_dct);
+            result.sub_rep(8, i, j, conv_dct.T()*this->sub_val(8, i, j)*conv_dct);
         }
     }
     return result;
@@ -308,11 +308,11 @@ Jvector& Jvector::normal()const{
     return *tmp;
 }
 
-Jvector& Jvector::operator^(const Jvector&  m) const{
-    Jvector* result=new Jvector;
+Jvector Jvector::operator^(const Jvector&  m) const{
+    Jvector result;
     for (int i=min(x(),m.x());i>=0;i--)
-        result->set(i,m.val(i)*val(i));
-    return *result;
+        result.set(i,m.val(i)*val(i));
+    return result;
 }
 Jvector& Jvector::operator^=(const Jvector&    m) {
     *this=*this ^ m;
@@ -331,8 +331,8 @@ const void printJmatrix(Jmatrix m) {
     for (int i=0;i<m.x();i++) {
         printf(" |");
         for (int j=0;j<m.y();j++)
-            printf(" %.10lf", m.Jmatrix::val(i,j));
-        printf(" |\n");
+            printf("\t%.10lf", m.Jmatrix::val(i,j));
+        printf("\t|\n");
     }
 }
 
@@ -341,37 +341,62 @@ const void printJmatrix(Jvector m) {
     for (int i=0;i<m.x();i++) {
         printf(" |");
         for (int j=0;j<m.y();j++)
-            printf(" %.10lf", m.Jmatrix::val(i,j));
-        printf(" |\n");
+            printf("\t%.10lf", m.Jmatrix::val(i,j));
+        printf("\t|\n");
     }
 }
 
 Jmatrix strassen(const Jmatrix& A, const Jmatrix& B) {
     Jmatrix result;
     int n=max(max(A.x(),A.y()),max(B.x(),B.y()));
-    if (n<=4) return A*B;
+    if (n<=20) return A*B;
     if (n%2==1) n++;
-    Jmatrix A11=A.sub_val(n/2,0,0);
-    Jmatrix A12=A.sub_val(n/2,0,n/2);
-    Jmatrix A21=A.sub_val(n/2,n/2,0);
-    Jmatrix A22=A.sub_val(n/2,n/2,n/2);
+    Jmatrix A11,A22,B11,B22,
     
-    Jmatrix B11=B.sub_val(n/2,0,0);
-    Jmatrix B12=B.sub_val(n/2,0,n/2);
-    Jmatrix B21=B.sub_val(n/2,n/2,0);
-    Jmatrix B22=B.sub_val(n/2,n/2,n/2);
+            A11pA22,A21pA22,A11pA12,A21mA11,A12mA22,
+            B11pB22,B12mB22,B21mB11,B11pB12,B21pB22;
     
-    Jmatrix M1=strassen(A11+A22, B11+B22 );
-    Jmatrix M2=strassen(A21+A22, B11     );
-    Jmatrix M3=strassen(A11,     B12-B22 );
-    Jmatrix M4=strassen(A22,     B21-B11 );
-    Jmatrix M5=strassen(A11+A12, B22     );
-    Jmatrix M6=strassen(A21-A11, B11+B12 );
-    Jmatrix M7=strassen(A12-A22, B21+B22 );
+    for (int i=(n/2)-1;i>=0;i--)
+        for (int j=(n/2)-1;j>=0;j--) {
+            A11.set(i, j, A.val(i, j));
+            A22.set(i, j, A.val(n/2+i, n/2+j));
+            B11.set(i, j, B.val(i, j));
+            B22.set(i, j, B.val(n/2+i, n/2+j));
+            
+            A11pA22.set(i, j, A11.val(i,    j)+A22.val(i, j));
+            A21pA22.set(i, j, A.val(n/2+i,  j)+A22.val(i, j));
+            A11pA12.set(i, j, A11.val(i,    j)+A.val(i, n/2+j));
+            A21mA11.set(i, j, A.val(n/2+i,  j)-A11.val(i, j));
+            A12mA22.set(i, j, A.val(i,  n/2+j)-A22.val(i, j));
+            
+            B11pB22.set(i, j, B11.val(i,    j)+B22.val(i, j));
+            B12mB22.set(i, j, B.val(i,  n/2+j)-B22.val(i, j));
+            B21mB11.set(i, j, B.val(n/2+i,  j)-B11.val(i, j));
+            B11pB12.set(i, j, B11.val(i,    j)+B.val(i, n/2+j));
+            B21pB22.set(i, j, B.val(n/2+i,  j)+B22.val(i, j));
+        }
+            
+    const Jmatrix&  M1=strassen(A11pA22, B11pB22 ),
+                    M2=strassen(A21pA22, B11     ),
+                    M3=strassen(A11,     B12mB22 ),
+                    M4=strassen(A22,     B21mB11 ),
+                    M5=strassen(A11pA12, B22     ),
+                    M6=strassen(A21mA11, B11pB12 ),
+                    M7=strassen(A12mA22, B21pB22 );
     
-    result.sub_rep(n/2, 0,   0,   M1+M4-M5+M7);
-    result.sub_rep(n/2, 0,   n/2, M3+M5);
-    result.sub_rep(n/2, n/2, 0,   M2+M4);
-    result.sub_rep(n/2, n/2, n/2, M1-M2+M3+M6);
+    for (int i=(n/2)-1;i>=0;i--)
+        for (int j=(n/2)-1;j>=0;j--) {
+            result.set(i,       j,      M1.val(i, j)+M4.val(i, j)-M5.val(i, j)+M7.val(i, j));
+            result.set(i,       n/2+j,  M3.val(i, j)+M5.val(i, j));
+            result.set(n/2+i,   j,      M2.val(i, j)+M4.val(i, j));
+            result.set(n/2+i,   n/2+j,  M1.val(i, j)-M2.val(i, j)+M3.val(i, j)+M6.val(i, j));
+        }
+    return result;
+}
+
+Jmatrix ID(int n) {
+    Jmatrix result;
+    for (int i=n-1;i>=0;i--)
+        result.set(i, i, 1.0);
     return result;
 }
